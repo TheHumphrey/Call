@@ -1,22 +1,35 @@
 {
-  "name": "my-novo-app",
+  "name": "Call",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@twilio-labs/plugin-rtc": "^0.8.3",
+    "@twilio/conversations": "^2.0.1",
+    "@twilio/video-processors": "^1.0.2",
+    "@twilio/video-room-monitor": "^1.0.0",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
-    "@types/styled-components": "^5.1.22",
+    "@types/react-icons": "^3.0.0",
+    "d3-timer": "^3.0.1",
+    "linkify-it": "^3.0.3",
+    "lodash.throttle": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
+    "twilio": "^3.74.0",
+    "twilio-video": "^2.20.0",
     "typescript": "^4.4.2",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -42,5 +55,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/d3-timer": "^3.0.0",
+    "@types/linkify-it": "^3.0.2",
+    "@types/lodash.throttle": "^4.1.6",
+    "@types/styled-components": "^5.1.22",
+    "@types/twilio": "^3.19.3"
   }
 }
