@@ -6,13 +6,13 @@ import { MessageList, ChatInput, ChatWindowHeader } from 'components'
 import { ChatWindowContainer } from './style'
 
 export const ChatWindow = () => {
-  const { isChatWindowOpen, messages, conversation } = useChatContext()
+  const { isChatWindowOpen, messages, channel } = useChatContext()
 
   return (
     <ChatWindowContainer isChatWindowOpen={isChatWindowOpen}>
       <ChatWindowHeader />
       <MessageList messages={messages} />
-      <ChatInput conversation={conversation!} isChatWindowOpen={isChatWindowOpen} />
+      <ChatInput channel={channel!} isChatWindowOpen={isChatWindowOpen} />
     </ChatWindowContainer>
   )
 }

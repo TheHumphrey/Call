@@ -1,20 +1,21 @@
 import styled from 'styled-components'
 
 type TChatWindowContainer = {
-  isChatWindowOpen?: boolean
+  isChatWindowOpen?: boolean;
 }
 
 export const ChatWindowContainer = styled.aside<TChatWindowContainer>`
-  display: ${({ isChatWindowOpen }) => isChatWindowOpen ? 'flex' : 'none'}
-  flex-direction: column
-  height: 100vh
+  display: ${({ isChatWindowOpen }) => isChatWindowOpen ? 'flex' : 'none'};
+  flex-direction: column;
+  height: 100vh;
+  width: 20vw;
 
-  background: '#FFFFFF'
-  z-index: 9
-  border-left: 1px solid #E4E7E9
+  background: '#FFFFFF';
+  z-index: 9;
+  border-left: 1px solid #E4E7E9;
 
-  position: absolute
+  position: absolute;
 
-  top: 0
-  right: 0
+  top: 0;
+  right: 0;
 `

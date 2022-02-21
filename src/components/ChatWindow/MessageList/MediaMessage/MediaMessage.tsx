@@ -1,4 +1,4 @@
-import { Media } from '@twilio/conversations'
+import { Media } from 'twilio-chat'
 
 import FileDownloadIcon from 'icons/FileDownloadIcon'
 

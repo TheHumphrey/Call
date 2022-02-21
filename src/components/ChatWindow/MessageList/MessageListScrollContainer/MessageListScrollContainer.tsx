@@ -1,11 +1,24 @@
 /* istanbul ignore file */
 import React from 'react'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
-import Button from '@material-ui/core/Button'
-import clsx from 'clsx'
-import { Message } from '@twilio/conversations'
+import { Message } from 'twilio-chat'
 import throttle from 'lodash.throttle'
 import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles'
+
+import {
+  OuterContainer,
+  ButtonCustom,
+  InnerScrollContainer,
+  MessageListContainer,
+} from './style'
+
+// type TStyles = {
+//   outerContainer: any;
+//   innerScrollContainer: any;
+//   messageListContainer: any;
+//   button: any;
+//   showButton: any;
+// }
 
 const styles = createStyles({
   outerContainer: {
@@ -115,15 +128,13 @@ export class MessageListScrollContainer extends React.Component<
   }
 
   render() {
-    const { classes } = this.props
-
     return (
-      <div className={classes.outerContainer}>
-        <div className={classes.innerScrollContainer} ref={this.chatThreadRef} data-cy-message-list-inner-scroll>
-          <div className={classes.messageListContainer}>
+      <OuterContainer>
+        <InnerScrollContainer ref={this.chatThreadRef} data-cy-message-list-inner-scroll>
+          <MessageListContainer>
             {this.props.children}
-            <Button
-              className={clsx(classes.button, { [classes.showButton]: this.state.showButton })}
+            <ButtonCustom
+              showButton={this.state.showButton}
               onClick={this.handleClick}
               startIcon={<ArrowDownwardIcon />}
               color="primary"
@@ -132,29 +143,15 @@ export class MessageListScrollContainer extends React.Component<
             >
               {this.state.messageNotificationCount} new message
               {this.state.messageNotificationCount > 1 && 's'}
-            </Button>
-          </div>
-        </div>
-      </div>
+            </ButtonCustom>
+          </MessageListContainer>
+        </InnerScrollContainer>
+      </OuterContainer>
     )
   }
 }
 
 export default withStyles(styles)(MessageListScrollContainer)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 // import { Message } from '@twilio/conversations'

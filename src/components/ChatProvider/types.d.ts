@@ -1,5 +1,5 @@
 export { }
 
 declare global {
-  interface Window { chatConversation: any; }
+  interface Window { chatConversation: any; chatClient: any }
 }

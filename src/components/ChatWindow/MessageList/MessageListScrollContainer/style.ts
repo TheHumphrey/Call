@@ -15,12 +15,15 @@ export const OuterContainer = styled.div`
 export const InnerScrollContainer = styled.div`
   height: 100%;
   overflow-y: auto;
-  padding: 0 1.2em 0;`
+  padding: 0 1.2em 0;
+  background: ${({ theme }) => theme.colors.white};
+`
 
 export const MessageListContainer = styled.div`
   overflow-y: auto;
   flex: 1;
-  padding-bottom: 1em;`
+  padding-bottom: 1em;
+`
 
 export const ButtonCustom = styled(Button) <TButton>`
   position: absolute;

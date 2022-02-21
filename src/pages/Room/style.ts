@@ -111,7 +111,7 @@ export const SecondaryCam = styled.div<TSecundaryCam>`
   position: absolute;
 
   top: 4%;
-  right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '12%' : '2%'};
+  right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '20%' : '2%'};
 
   border-radius: 2px;
 `

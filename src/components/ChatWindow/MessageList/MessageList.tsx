@@ -1,5 +1,5 @@
 import React from 'react'
-import { Message } from '@twilio/conversations'
+import { Message } from 'twilio-chat'
 import { useVideoContext } from 'hooks'
 import { FileMessage, MessageInfo, TextMessage } from 'components'
 import MessageListScrollContainer from './MessageListScrollContainer/MessageListScrollContainer'

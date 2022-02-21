@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import Button from '@material-ui/core/Button'
+import { useEffect, useState } from 'react'
 import ChatIcon from 'icons/ChatIcon'
+import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core'
 import { useChatContext, useVideoContext } from 'hooks'
 
+import { theme } from 'styles/theme'
+
+import {
+  Circle,
+  IconContainer,
+} from './style'
+
 export const ANIMATION_DURATION = 700
 
 const useStyles = makeStyles({
-  iconContainer: {
-    position: 'relative',
-    display: 'flex',
-  },
-  circle: {
-    width: '10px',
-    height: '10px',
-    backgroundColor: '#5BB75B',
-    borderRadius: '50%',
-    position: 'absolute',
-    top: '-3px',
-    left: '13px',
-    opacity: 0,
-    transition: `opacity ${ANIMATION_DURATION * 0.5}ms ease-in`,
-  },
-  hasUnreadMessages: {
-    opacity: 1,
-  },
   ring: {
     border: '3px solid #5BB75B',
     borderRadius: '30px',
@@ -58,7 +47,7 @@ const useStyles = makeStyles({
 export const ToggleChatButton = () => {
   const classes = useStyles()
   const [shouldAnimate, setShouldAnimate] = useState(false)
-  const { isChatWindowOpen, setIsChatWindowOpen, conversation, hasUnreadMessages } = useChatContext()
+  const { isChatWindowOpen, setIsChatWindowOpen, channel, hasUnreadMessages } = useChatContext()
   const { setIsBackgroundSelectionOpen } = useVideoContext()
 
   const toggleChatWindow = () => {
@@ -73,25 +62,25 @@ export const ToggleChatButton = () => {
   }, [shouldAnimate])
 
   useEffect(() => {
-    if (conversation && !isChatWindowOpen) {
+    if (channel && !isChatWindowOpen) {
       const handleNewMessage = () => setShouldAnimate(true)
-      conversation.on('messageAdded', handleNewMessage)
+      channel.on('messageAdded', handleNewMessage)
       return () => {
-        conversation.off('messageAdded', handleNewMessage)
+        channel.off('messageAdded', handleNewMessage)
       }
     }
-  }, [conversation, isChatWindowOpen])
+  }, [channel, isChatWindowOpen])
 
   return (
     <Button
       data-cy-chat-button
       onClick={toggleChatWindow}
       startIcon={
-        <div className={classes.iconContainer}>
-          <ChatIcon fill="#fff" />
+        <IconContainer >
+          <ChatIcon fill={isChatWindowOpen ? theme.colors.white : theme.colors.grayLight} />
           <div className={clsx(classes.ring, { [classes.animateRing]: shouldAnimate })} />
-          <div className={clsx(classes.circle, { [classes.hasUnreadMessages]: hasUnreadMessages })} />
-        </div>
+          <Circle hasUnreadMessages={hasUnreadMessages} />
+        </IconContainer>
       }
     >
     </Button>

@@ -23,6 +23,7 @@ export const MediaInfo = styled.div`
   p {
     margin: 0;
     font-size: 12px;
+    font-family: 'Roboto';
   }
 `
 
@@ -30,6 +31,7 @@ export const Filename = styled.p`
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'Roboto';
 `
 
 export const Size = styled.p`

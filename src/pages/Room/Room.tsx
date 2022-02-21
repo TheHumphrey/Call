@@ -28,14 +28,24 @@ import {
 
 import { ChatWindow, ParticipantList } from 'components'
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
-import { useChatContext } from "hooks"
+import { useChatContext, useVideoContext } from "hooks"
 
 export const Room = () => {
   const [pacienteVideo, setPacienteVideo] = useState()
   const [currentTime, setCurrentTime] = useState('00:00')
+
+  const history = useNavigate()
+
+  const { room } = useVideoContext()
   const { isChatWindowOpen } = useChatContext()
+
+  const handleDisconnect = () => {
+    room?.disconnect()
+
+    history('/', { replace: true })
+  }
 
   return (
     <Container>
@@ -58,13 +68,11 @@ export const Room = () => {
 
         <ToggleChatButton />
 
-        <Link to="/">
-          <CallButton>
-            <CallButtonIcon>
-              <BsTelephoneXFill />
-            </CallButtonIcon>
-          </CallButton>
-        </Link>
+        <CallButton onClick={handleDisconnect}>
+          <CallButtonIcon>
+            <BsTelephoneXFill />
+          </CallButtonIcon>
+        </CallButton>
 
       </BottomMenu>
 
