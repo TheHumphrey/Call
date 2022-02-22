@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Grid } from '@material-ui/core'
 import { Channel } from 'twilio-chat'
 import { isMobile } from 'utils'
 import FileAttachmentIcon from 'icons/FileAttachmentIcon'
@@ -10,11 +9,14 @@ import {
   ButtonCustom,
   ButtonContainer,
   ChatInputContainer,
+  Container,
   FileButtonContainer,
   FileButtonLoadingSpinner,
   TextArea,
+  GridCustom,
   TextAreaContainer,
 } from './style'
+import { theme } from 'styles/theme'
 
 interface ChatInputProps {
   channel: Channel;
@@ -89,51 +91,53 @@ export const ChatInput = ({ channel, isChatWindowOpen }: ChatInputProps) => {
         variant="error"
         handleClose={() => setFileSendError(null)}
       />
-      <TextAreaContainer isTextareaFocused={isTextareaFocused}>
-        <TextArea
-          minRows={1}
-          maxRows={3}
-          aria-label="chat input"
-          placeholder="Write a message..."
-          onKeyPress={handleReturnKeyPress}
-          onChange={handleChange}
-          value={messageBody}
-          data-cy-chat-input
-          ref={textInputRef}
-          onFocus={() => setIsTextareaFocused(true)}
-          onBlur={() => setIsTextareaFocused(false)}
-        />
-      </TextAreaContainer>
+      <Container isTextareaFocused={isTextareaFocused}>
+        <TextAreaContainer>
+          <TextArea
+            minRows={1}
+            maxRows={6}
+            aria-label="chat input"
+            placeholder="Escreva uma mensagem..."
+            onKeyPress={handleReturnKeyPress}
+            onChange={handleChange}
+            value={messageBody}
+            data-cy-chat-input
+            ref={textInputRef}
+            onFocus={() => setIsTextareaFocused(true)}
+            onBlur={() => setIsTextareaFocused(false)}
+          />
+        </TextAreaContainer>
 
-      <Grid container alignItems="flex-end" justifyContent="flex-end" wrap="nowrap">
-        <input
-          ref={fileInputRef}
-          type="file"
-          style={{ display: 'none' }}
-          onChange={handleSendFile}
-          value={''}
-          accept={ALLOWED_FILE_TYPES}
-        />
-        <ButtonContainer>
-          <FileButtonContainer>
-            <ButtonCustom onClick={() => fileInputRef.current?.click()} disabled={isSendingFile}>
-              <FileAttachmentIcon />
+        <GridCustom >
+          <input
+            ref={fileInputRef}
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleSendFile}
+            value={''}
+            accept={ALLOWED_FILE_TYPES}
+          />
+          <ButtonContainer>
+            <FileButtonContainer>
+              <ButtonCustom onClick={() => fileInputRef.current?.click()} disabled={isSendingFile}>
+                <FileAttachmentIcon />
+              </ButtonCustom>
+
+              {isSendingFile && <FileButtonLoadingSpinner size={24} />}
+            </FileButtonContainer>
+
+            <ButtonCustom
+              onClick={() => handleSendMessage(messageBody)}
+              color="primary"
+              variant="contained"
+              // disabled={!isValidMessage}
+              data-cy-send-message-button
+            >
+              <SendMessageIcon />
             </ButtonCustom>
-
-            {isSendingFile && <FileButtonLoadingSpinner size={24} />}
-          </FileButtonContainer>
-
-          <ButtonCustom
-            onClick={() => handleSendMessage(messageBody)}
-            color="primary"
-            variant="contained"
-            disabled={!isValidMessage}
-            data-cy-send-message-button
-          >
-            <SendMessageIcon />
-          </ButtonCustom>
-        </ButtonContainer>
-      </Grid>
+          </ButtonContainer>
+        </GridCustom>
+      </Container>
     </ChatInputContainer>
   )
 }

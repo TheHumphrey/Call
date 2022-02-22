@@ -1,10 +1,15 @@
 import styled from 'styled-components'
+import { Modal } from "@material-ui/core"
 
 import { ToggleAudioButton, ToggleVideoButton, MainParticipant } from "components"
 
 type TSecundaryCam = {
   isChatWindowOpen: boolean;
 }
+
+export const ModalCustom = styled(Modal)`
+
+`
 
 export const Container = styled.div`
   width: 100vw;

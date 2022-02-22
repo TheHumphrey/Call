@@ -21,21 +21,24 @@ export const TextArea = styled(TextareaAutosize)`
   font-size: 14px;
   font-family: 'Roboto';
   outline: none;
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
 `
 
 export const ButtonCustom = styled(Button)`
-  padding: 0.56em;
-  min-width: auto;
+  min-width: auto !important;
+  padding: 0;
+  padding-bottom: 2px !important;
 `
 
 export const ButtonContainer = styled.div`
-  margin: 1em 0 0 1em;
   display: flex;
+  align-items: flex-end;
 `
 
 export const FileButtonContainer = styled.div`
   position: relative;
-  margin-right: 1em;
 `
 
 export const FileButtonLoadingSpinner = styled(CircularProgress)`
@@ -46,10 +49,25 @@ export const FileButtonLoadingSpinner = styled(CircularProgress)`
   margin-left: -12 !important;
 `
 
-export const TextAreaContainer = styled.div<TTextContainer>`
+export const TextAreaContainer = styled.div`
   display: flex;
   margin-top: 0.4em;
   padding: 0.48em 0.7em;
-  border: 2px solid ${({ isTextareaFocused, theme }) => isTextareaFocused ? theme.colors.grayDark : 'transparent'};
-  border-radius: ${({ isTextareaFocused }) => isTextareaFocused ? '4px' : '0px'};
+  width: 80%;
+`
+
+export const Container = styled.div<TTextContainer>`
+  display: flex;
+  border: 1px solid ${({ isTextareaFocused, theme }) => isTextareaFocused ? theme.colors.grayDark : theme.colors.grayLight};
+  border-radius: 4px;
+`
+
+export const GridCustom = styled.div`
+  display: flex;
+  padding-top: 0.4em;
+  padding-bottom: .4em;
+  padding-right: .4em;
+  width: auto;
+  height: auto;
+  align-items: flex-end;
 `

@@ -1,8 +1,16 @@
 import React from 'react';
 
-export default function FileAttachmentIcon() {
+type TProps = {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+export default function FileAttachmentIcon(props: TProps) {
+  const { width, height, color } = props
+
   return (
-    <svg width="24" height="24" viewBox="-1 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width || 24} height={height || 24} viewBox="-1 0 24 20" fill={color || 'none'} xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

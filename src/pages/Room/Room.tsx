@@ -9,31 +9,34 @@ import {
   ResolutionMenu,
   BottomMenu,
   SecondaryCam,
-  BottomButton,
+  // BottomButton,
   CallButton,
   CallButtonIcon,
-  SecundaryMenu,
-  ConectionMenu,
+  // SecundaryMenu,
+  // ConectionMenu,
   AudioButton,
   VideoButton,
-  CamParticipant,
+  // CamParticipant,
 } from './style'
 
+import { Modal } from "@material-ui/core"
+
 import {
-  BsThreeDots,
+  // BsThreeDots,
   BsTelephoneXFill,
-  BsThreeDotsVertical,
-  BsReception4,
+  // BsThreeDotsVertical,
+  // BsReception4,
 } from "react-icons/bs"
 
 import { ChatWindow, ParticipantList } from 'components'
 
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext } from "hooks"
 
 export const Room = () => {
-  const [pacienteVideo, setPacienteVideo] = useState()
+  // const [pacienteVideo, setPacienteVideo] = useState()
+  const [openModal, setOpenModal] = useState(false)
   const [currentTime, setCurrentTime] = useState('00:00')
 
   const history = useNavigate()
@@ -90,6 +93,15 @@ export const Room = () => {
       </SecondaryCam>
 
       <ChatWindow />
+
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(!openModal)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <span></span>
+      </Modal>
 
     </Container>
   )
