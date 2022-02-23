@@ -1,7 +1,13 @@
 {
-  // note you must disable the base rule as it can report incorrect errors
-  "no-unused-vars": "off",
-  "@typescript-eslint/no-unused-vars": [
-    "error"
-  ]
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "env": {
+    "es6": true
+  },
+  "globals": {},
+  "plugins": [],
+  "rules": {
+    "no-unused-vars": "off",
+  }
 }
