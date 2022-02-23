@@ -3,9 +3,36 @@ import { Modal } from "@material-ui/core"
 
 import { ToggleAudioButton, ToggleVideoButton, MainParticipant } from "components"
 
+import { IconType } from "react-icons"
+
+import {
+  BsFileEarmarkText,
+  BsClipboardX,
+} from "react-icons/bs"
+
+import { FaPrescriptionBottleAlt } from "react-icons/fa";
+
 type TSecundaryCam = {
   isChatWindowOpen: boolean;
 }
+
+export const styleIcon = (icon: IconType) => {
+  return styled(icon)`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors.grayLight};
+  justify-content: center;
+  align-items: center;
+`
+}
+
+export const FileIcon = styleIcon(BsFileEarmarkText)
+
+export const ClipIcon = styleIcon(BsClipboardX)
+
+export const BottleIcon = styleIcon(FaPrescriptionBottleAlt)
 
 export const ModalCustom = styled(Modal)`
 
@@ -35,6 +62,8 @@ export const TopMenu = styled.div`
   position: absolute;
   left: 45%;
   top: 4%;
+
+  z-index: 10;
 
   flex-direction: row;
 `
@@ -106,6 +135,21 @@ export const BottomMenu = styled.div`
 
   background-color: ${({ theme }) => theme.colors.grayDark};
   flex-direction: row;
+  border-radius: 4px;
+`
+
+export const SideMenu = styled.div<TSecundaryCam>`
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 168px;
+  position: absolute;
+
+  right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '22%' : '2%'};
+  bottom: 42%;
+  z-index: 10;
+
+  background-color: ${({ theme }) => theme.colors.grayDark};
   border-radius: 4px;
 `
 

@@ -9,6 +9,7 @@ import {
   ResolutionMenu,
   BottomMenu,
   SecondaryCam,
+  SideMenu,
   // BottomButton,
   CallButton,
   CallButtonIcon,
@@ -17,16 +18,17 @@ import {
   AudioButton,
   VideoButton,
   // CamParticipant,
+  FileIcon,
+  ClipIcon,
+  BottleIcon,
 } from './style'
 
 import { Modal } from "@material-ui/core"
 
 import {
-  // BsThreeDots,
   BsTelephoneXFill,
-  // BsThreeDotsVertical,
-  // BsReception4,
 } from "react-icons/bs"
+
 
 import { ChatWindow, ParticipantList } from 'components'
 
@@ -48,6 +50,11 @@ export const Room = () => {
     room?.disconnect()
 
     history('/', { replace: true })
+
+  }
+
+  const teste = () => {
+    document.documentElement.requestFullscreen()
   }
 
   return (
@@ -56,7 +63,7 @@ export const Room = () => {
         <ParticipantList isPrimaryCam />
       </PrimaryCam>
       <TopMenu >
-        <LabelMenu >Consulta Telemedicina</LabelMenu>
+        <LabelMenu onClick={teste} >Consulta Telemedicina</LabelMenu>
         <TimerMenu>{currentTime}</TimerMenu>
         <ResolutionMenu>HD</ResolutionMenu>
       </TopMenu>
@@ -79,7 +86,20 @@ export const Room = () => {
 
       </BottomMenu>
 
+      <SideMenu isChatWindowOpen={isChatWindowOpen}>
 
+        <CallButton>
+          <ClipIcon />
+        </CallButton>
+
+        <CallButton>
+          <FileIcon />
+        </CallButton>
+
+        <CallButton>
+          <BottleIcon />
+        </CallButton>
+      </SideMenu>
 
       <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
         <ParticipantList />

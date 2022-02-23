@@ -74,7 +74,11 @@ export const FormTelemd = () => {
   return (
     <Container>
       <ContainerTitle>
-        <Title>TELEMED</Title>
+        <Title>{' '}</Title>
+        <Text>
+          Medico:{' '}
+          <SubText>Matheus</SubText>
+        </Text>
         <Text>
           Paciente:{' '}
           <SubText>{paciente.name}</SubText>

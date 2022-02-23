@@ -1,4 +1,3 @@
-import React from 'react'
 import { Participant } from 'twilio-video'
 import { useParticipantNetworkQualityLevel } from 'hooks'
 
@@ -13,8 +12,8 @@ export const NetworkQualityLevel = ({ participant }: { participant: Participant 
   if (networkQualityLevel === null) return null
 
   return (
-    <OuterContainer >
-      <InnerContainer >
+    <OuterContainer>
+      <InnerContainer>
         {BARS_ARRAY.map(level => (
           <Level
             key={level}

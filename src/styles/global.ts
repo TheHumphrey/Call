@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 
+import logo from 'assets/logo-umc.jpeg'
+import awsCharacter from 'assets/aws-med-character.png'
+
 export default createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -10,9 +13,11 @@ export default createGlobalStyle`
   }
 
   body {
-      margin: 0;
-      color: #000;
-      user-select: none;
+    margin: 0;
+    color: #000;
+    user-select: none;
+    background: url(${logo}) center top no-repeat, url(${awsCharacter}) left bottom no-repeat;
+    background-size: 15em, 10em;
   }
 
   main {

@@ -9,7 +9,7 @@ interface MessageListProps {
 }
 
 const getFormattedTime = (message?: Message) =>
-  message?.dateCreated.toLocaleTimeString('en-us', { hour: 'numeric', minute: 'numeric' }).toLowerCase()
+  message?.dateCreated.toLocaleTimeString('pt-Br', { hour: 'numeric', minute: 'numeric' }).toLowerCase()
 
 export const MessageList = ({ messages }: MessageListProps) => {
   const { room } = useVideoContext()

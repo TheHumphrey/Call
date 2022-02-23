@@ -22,7 +22,7 @@ type TLevel = {
 }
 
 export const Level = styled.div<TLevel>`
-  width: 2px;
+  width: 20px;
   height: ${({ STEP, level }) => STEP * (level + 1)}px;
   margin-right: 1px;
 
