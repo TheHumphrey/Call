@@ -125,7 +125,7 @@ export const ResolutionMenu = styled.div`
 
 export const BottomMenu = styled.div`
   display: flex;
-  width: 224px;
+  width: 280px;
   height: 56px;
   position: absolute;
 
@@ -229,6 +229,16 @@ export const CallButtonIcon = styled.div`
   height: 40px;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.secondary};
+  justify-content: center;
+  align-items: center;
+`
+
+export const FullButtonIcon = styled.div`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors.white};
   justify-content: center;
   align-items: center;
 `

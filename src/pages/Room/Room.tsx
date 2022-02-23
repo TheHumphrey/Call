@@ -21,12 +21,15 @@ import {
   FileIcon,
   ClipIcon,
   BottleIcon,
+  FullButtonIcon,
 } from './style'
 
 import { Modal } from "@material-ui/core"
 
 import {
   BsTelephoneXFill,
+  BsArrowsFullscreen,
+  BsFullscreenExit,
 } from "react-icons/bs"
 
 
@@ -39,6 +42,7 @@ import { useChatContext, useVideoContext } from "hooks"
 export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
   const [openModal, setOpenModal] = useState(false)
+  const [screen, setScreen] = useState(false)
   const [currentTime, setCurrentTime] = useState('00:00')
 
   const history = useNavigate()
@@ -51,6 +55,11 @@ export const Room = () => {
 
     history('/', { replace: true })
 
+  }
+
+  const handleFullscreen = () => {
+    screen ? document.exitFullscreen() : document.documentElement.requestFullscreen()
+    setScreen(!screen)
   }
 
   const teste = () => {
@@ -82,6 +91,12 @@ export const Room = () => {
           <CallButtonIcon>
             <BsTelephoneXFill />
           </CallButtonIcon>
+        </CallButton>
+
+        <CallButton onClick={handleFullscreen}>
+          <FullButtonIcon>
+            {screen ? (<BsFullscreenExit />) : (<BsArrowsFullscreen />)}
+          </FullButtonIcon>
         </CallButton>
 
       </BottomMenu>
