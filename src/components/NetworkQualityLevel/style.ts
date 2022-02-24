@@ -22,13 +22,11 @@ type TLevel = {
 }
 
 export const Level = styled.div<TLevel>`
-  width: 20px;
   height: ${({ STEP, level }) => STEP * (level + 1)}px;
-  margin-right: 1px;
 
   background: ${({ networkQualityLevel, level }) => networkQualityLevel > level ? 'white' : 'rgba(255, 255, 255, 0.2)'};
 
-  :not(:last-child){
+  /* :not(:last-child){
     border-right: none;
-  }
+  } */
 `

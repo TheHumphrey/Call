@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import {
   Container,
@@ -43,7 +43,20 @@ export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
   const [openModal, setOpenModal] = useState(false)
   const [screen, setScreen] = useState(false)
-  const [currentTime, setCurrentTime] = useState('00:00')
+  const [currentTime, setCurrentTime] = useState(0)
+  const [isTimeCount, setIsTimeCount] = useState(true)
+
+  useEffect(() => {
+    if (isTimeCount) {
+      setTimeout(() => {
+        setCurrentTime(state => state + 1)
+      }, 1000)
+    }
+  }, [currentTime])
+
+  const hours = Math.floor(currentTime / 60 / 60)
+  const minutes = Math.floor(currentTime / 60)
+  const seconds = currentTime % 60
 
   const history = useNavigate()
 
@@ -52,18 +65,14 @@ export const Room = () => {
 
   const handleDisconnect = () => {
     room?.disconnect()
+    setIsTimeCount(false)
 
     history('/', { replace: true })
-
   }
 
   const handleFullscreen = () => {
     screen ? document.exitFullscreen() : document.documentElement.requestFullscreen()
     setScreen(!screen)
-  }
-
-  const teste = () => {
-    document.documentElement.requestFullscreen()
   }
 
   return (
@@ -72,8 +81,10 @@ export const Room = () => {
         <ParticipantList isPrimaryCam />
       </PrimaryCam>
       <TopMenu >
-        <LabelMenu onClick={teste} >Consulta Telemedicina</LabelMenu>
-        <TimerMenu>{currentTime}</TimerMenu>
+        <LabelMenu>Consulta Telemedicina</LabelMenu>
+        <TimerMenu>
+          {`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
+        </TimerMenu>
         <ResolutionMenu>HD</ResolutionMenu>
       </TopMenu>
 

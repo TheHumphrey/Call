@@ -63,15 +63,15 @@ export const ParticipantInfo = ({
       hideParticipant={hideParticipant}
     >
       <InfoContainer >
-        {/* {!isPrimaryCam && (<NetworkQualityLevel participant={participant} />)} */}
+        {!isPrimaryCam && (<NetworkQualityLevel participant={participant} />)}
         <InfoRow >
           <Identity >
             <AudioLevelIndicator audioTrack={audioTrack} />
             <Typography >
               {participant.identity}
             </Typography>
-            {/* {isPrimaryCam && (<NetworkQualityLevel participant={participant} />)} */}
           </Identity>
+          {isPrimaryCam && (<NetworkQualityLevel participant={participant} />)}
         </InfoRow>
         <div>{isSelected && <PinIcon />}</div>
       </InfoContainer>

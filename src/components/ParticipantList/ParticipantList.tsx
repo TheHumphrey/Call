@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Participant, useSelectedParticipant } from 'components'
-import { useMainParticipant, useParticipants, useVideoContext } from 'hooks'
+import { useParticipants, useVideoContext } from 'hooks'
 
 import {
   Container,

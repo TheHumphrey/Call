@@ -88,7 +88,7 @@ export const LabelMenu = styled.div`
 
 export const TimerMenu = styled.div`
   display: flex;
-  width: 49px;
+  width: 54px;
   height: 24px;
   border-radius: 0px 2px 2px 0px;
 
