@@ -1,12 +1,12 @@
 import { Track, VideoBandwidthProfileOptions } from 'twilio-video'
 
 export interface Settings {
-  trackSwitchOffMode: VideoBandwidthProfileOptions['trackSwitchOffMode']
-  dominantSpeakerPriority?: Track.Priority
-  bandwidthProfileMode: VideoBandwidthProfileOptions['mode']
-  maxAudioBitrate: string
-  contentPreferencesMode?: 'auto' | 'manual'
-  clientTrackSwitchOffControl?: 'auto' | 'manual'
+  trackSwitchOffMode: VideoBandwidthProfileOptions['trackSwitchOffMode'];
+  dominantSpeakerPriority?: Track.Priority;
+  bandwidthProfileMode: VideoBandwidthProfileOptions['mode'];
+  maxAudioBitrate: string;
+  contentPreferencesMode?: 'auto' | 'manual';
+  clientTrackSwitchOffControl?: 'auto' | 'manual';
 }
 
 type SettingsKeys = keyof Settings

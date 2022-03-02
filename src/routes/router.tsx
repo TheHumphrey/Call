@@ -2,6 +2,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import styled from 'styled-components'
 
 import {
+  DoctorLobby,
   FormTelemd,
   Room,
   RoomNotFound
@@ -27,6 +28,18 @@ const App = ({ roomState }: any) => (
   </>
 );
 
+const AppDoctor = ({ roomState }: any) => (
+  <>
+    {roomState === 'disconnected' ? (
+      <DoctorLobby />
+    ) : (
+      <Main>
+        <Room />
+      </Main>
+    )}
+  </>
+);
+
 const AppRouter = () => {
   const roomState = useRoomState();
 
@@ -35,6 +48,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<RoomNotFound />} />
         <Route path="/:URLRoomName" element={<App roomState={roomState} />} />
+        <Route path="/doctor/:URLRoomName" element={<AppDoctor roomState={roomState} />} />
         <Route path="/call" element={<Room />} />
       </Routes>
     </BrowserRouter>

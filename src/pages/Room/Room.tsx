@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 
 import {
@@ -37,22 +38,30 @@ import { ChatWindow, ParticipantList } from 'components'
 
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
-import { useChatContext, useVideoContext } from "hooks"
+import { useChatContext, useVideoContext, useParticipants } from "hooks"
 
 export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
   const [openModal, setOpenModal] = useState(false)
   const [screen, setScreen] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
-  const [isTimeCount, setIsTimeCount] = useState(true)
+  const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
+
+  const participants = useParticipants()
 
   useEffect(() => {
-    if (isTimeCount) {
+    if (!isAwaitDoctor) {
       setTimeout(() => {
         setCurrentTime(state => state + 1)
       }, 1000)
     }
-  }, [currentTime])
+  }, [isAwaitDoctor, currentTime])
+
+  useEffect(
+    () => {
+      setIsAwaitDoctor(participants.length === 0)
+    }, [participants]
+  )
 
   const hours = Math.floor(currentTime / 60 / 60)
   const minutes = Math.floor(currentTime / 60)
@@ -65,7 +74,7 @@ export const Room = () => {
 
   const handleDisconnect = () => {
     room?.disconnect()
-    setIsTimeCount(false)
+    setIsAwaitDoctor(false)
 
     history('/', { replace: true })
   }
@@ -75,7 +84,11 @@ export const Room = () => {
     setScreen(!screen)
   }
 
-  return (
+  return isAwaitDoctor ? (
+    <>
+      <h1>Esperando Doctor</h1>
+    </>
+  ) : (
     <Container>
       <PrimaryCam>
         <ParticipantList isPrimaryCam />

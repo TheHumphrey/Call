@@ -17,6 +17,7 @@ export const Container = styled.div`
 export const ContainerTitle = styled.div`
   display: flex;
   flex-direction: column;
+  user-select: text;
 
   margin-left: 45px;
 `
