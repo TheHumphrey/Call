@@ -46,7 +46,7 @@ export const DoctorLobby = () => {
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
-  const { URLRoomName } = useParams()
+  const { URLRoomName, token } = useParams()
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {

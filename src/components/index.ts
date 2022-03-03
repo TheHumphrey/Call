@@ -28,3 +28,10 @@ export { ChatProvider } from './ChatProvider/ChatProvider'
 
 export { useSelectedParticipant } from './VideoProvider/useSelectedParticipant/useSelectedParticipant'
 export { SelectedParticipantProvider } from './VideoProvider/useSelectedParticipant/useSelectedParticipant'
+
+export { FormTypeButtons } from './FormTypeButtons/FormTypeButtons'
+export { BaseButton } from './BaseButton/BaseButton'
+
+export { ClinicRegisterWrapper } from './ClinicRegisterWrapper/ClinicRegisterWrapper'
+export { AllRegistersModal } from './ClinicRegisterWrapper/components/AllRegistersModal/AllRegistersModal'
+export { ClinicType } from './ClinicRegisterWrapper/components/ClinicType/ClinicType'
