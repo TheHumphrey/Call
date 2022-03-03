@@ -12,6 +12,7 @@ export const theme = {
     greenLight: '#48C26A',
     blueMedium: '#339FFF',
     blueLight: 'rgba(123, 191, 255, 0.6);',
+    black: '#000',
   }
 }
 
