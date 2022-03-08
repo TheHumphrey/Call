@@ -23,9 +23,10 @@ import {
   ClipIcon,
   BottleIcon,
   FullButtonIcon,
+  ModalCustom,
+  ModalBox,
+  XIcon,
 } from './style'
-
-import { Modal } from "@material-ui/core"
 
 import {
   BsTelephoneXFill,
@@ -34,11 +35,12 @@ import {
 } from "react-icons/bs"
 
 
-import { ChatWindow, ParticipantList } from 'components'
+import { ChatWindow, ParticipantList, ClinicRegisterWrapper } from 'components'
 
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext, useParticipants } from "hooks"
+import { TDataProntuario } from "types"
 
 export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
@@ -127,7 +129,7 @@ export const Room = () => {
 
       <SideMenu isChatWindowOpen={isChatWindowOpen}>
 
-        <CallButton>
+        <CallButton onClick={() => setOpenModal(true)}>
           <ClipIcon />
         </CallButton>
 
@@ -153,14 +155,17 @@ export const Room = () => {
 
       <ChatWindow />
 
-      <Modal
+      <ModalCustom
         open={openModal}
         onClose={() => setOpenModal(!openModal)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <span></span>
-      </Modal>
+        <ModalBox>
+          <XIcon onClick={() => setOpenModal(false)} />
+          <ClinicRegisterWrapper datas={{} as TDataProntuario} getDocumentsAfterSave={() => { }} token="aa" />
+        </ModalBox>
+      </ModalCustom>
 
     </Container>
   )
