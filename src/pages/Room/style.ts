@@ -26,6 +26,11 @@ export const styleIcon = (icon: IconType) => {
   color: ${({ theme }) => theme.colors.grayLight};
   justify-content: center;
   align-items: center;
+
+  :hover {
+    color: ${({ theme }) => theme.colors.white};
+    transition: .2s;
+  }
 `
 }
 

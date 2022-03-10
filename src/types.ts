@@ -239,3 +239,5 @@ export type TDataProntuario = {
   procedures: IProcedures[];
   professional: TProfessional;
 }
+
+export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"

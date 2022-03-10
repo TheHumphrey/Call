@@ -35,21 +35,27 @@ import {
 } from "react-icons/bs"
 
 
-import { ChatWindow, ParticipantList, ClinicRegisterWrapper } from 'components'
+import { ChatWindow, ParticipantList, ClinicRegisterWrapper, FormTypeButtons } from 'components'
 
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext, useParticipants } from "hooks"
 import { TDataProntuario } from "types"
+import { documentApi } from "lib/api/document"
 
 export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
-  const [openModal, setOpenModal] = useState(false)
+  const [openModalClinicalRecord, setOpenModalClinicalRecord] = useState(false)
+  const [openModalRecipe, setOpenModalRecipe] = useState(false)
   const [screen, setScreen] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
+  const [datas, setDatas] = useState<any>()
 
   const participants = useParticipants()
+
+  const token = 'teste'
+  const documentService = documentApi(token)
 
   useEffect(() => {
     if (!isAwaitDoctor) {
@@ -84,6 +90,12 @@ export const Room = () => {
   const handleFullscreen = () => {
     screen ? document.exitFullscreen() : document.documentElement.requestFullscreen()
     setScreen(!screen)
+  }
+
+  const getDocumentsAfterSave = async () => {
+    const documents = await documentService.get(`/documents?patient=${datas.patient.id}`);
+
+    setDatas((prev: any) => ({ ...prev, documents: documents.data.reverse() }));
   }
 
   return isAwaitDoctor ? (
@@ -129,12 +141,12 @@ export const Room = () => {
 
       <SideMenu isChatWindowOpen={isChatWindowOpen}>
 
-        <CallButton onClick={() => setOpenModal(true)}>
+        <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
           <ClipIcon />
         </CallButton>
 
         <CallButton>
-          <FileIcon />
+          <FileIcon onClick={() => setOpenModalRecipe(true)} />
         </CallButton>
 
         <CallButton>
@@ -156,17 +168,28 @@ export const Room = () => {
       <ChatWindow />
 
       <ModalCustom
-        open={openModal}
-        onClose={() => setOpenModal(!openModal)}
+        open={openModalClinicalRecord}
+        onClose={() => setOpenModalClinicalRecord(!openModalClinicalRecord)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <ModalBox>
-          <XIcon onClick={() => setOpenModal(false)} />
+          <XIcon onClick={() => setOpenModalClinicalRecord(false)} />
           <ClinicRegisterWrapper datas={{} as TDataProntuario} getDocumentsAfterSave={() => { }} token="aa" />
         </ModalBox>
       </ModalCustom>
 
+      <ModalCustom
+        open={openModalRecipe}
+        onClose={() => setOpenModalRecipe(!openModalRecipe)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <ModalBox>
+          <XIcon onClick={() => setOpenModalRecipe(false)} />
+          <FormTypeButtons getModelsByType={null} setTypeDocumentSelected={null} />
+        </ModalBox>
+      </ModalCustom>
     </Container>
   )
 }

@@ -1,5 +1,5 @@
 import { ButtonsContainer } from "./style"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { BaseButton } from 'components'
 
@@ -17,9 +17,9 @@ export const FormTypeButtons = ({ getModelsByType, setTypeDocumentSelected }: Pr
     getModelsByType({ value: value })
   }
 
-  useEffect(() => {
-    getModelsByType({ value: "prescription" })
-  }, [])
+  // useEffect(() => {
+  //   getModelsByType({ value: "prescription" })
+  // }, [])
 
   return (
     <>
@@ -42,14 +42,14 @@ export const FormTypeButtons = ({ getModelsByType, setTypeDocumentSelected }: Pr
           Receita
         </BaseButton>
 
-        <BaseButton
+        {/* <BaseButton
           customType="primary"
           value="exam"
           isSelected={isSelected}
           onClick={(event: any) => handleClick(event.target.value)}
         >
           Exame
-        </BaseButton>
+        </BaseButton> */}
         <BaseButton
           customType="primary"
           value="medicalCertificate"
@@ -58,7 +58,7 @@ export const FormTypeButtons = ({ getModelsByType, setTypeDocumentSelected }: Pr
         >
           Atestado
         </BaseButton>
-        <BaseButton
+        {/* <BaseButton
           customType="primary"
           value="medicalReferral"
           isSelected={isSelected}
@@ -73,7 +73,7 @@ export const FormTypeButtons = ({ getModelsByType, setTypeDocumentSelected }: Pr
           onClick={(event: any) => handleClick(event.target.value)}
         >
           Orientações
-        </BaseButton>
+        </BaseButton> */}
       </ButtonsContainer>
     </>
   )

@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import { TDocumentTypes } from 'types'
 
 type TStatus = "empty" | "progress" | "finished"
-
-type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
 
 
 export const useDocuments = () => {
