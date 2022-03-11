@@ -26,7 +26,7 @@ import {
   ModalCustom,
   ModalBox,
   XIcon,
-  PacientInfo,
+  PacientInfoContainer,
 } from './style'
 
 import {
@@ -41,13 +41,14 @@ import {
   ParticipantList,
   ClinicRegisterWrapper,
   FormTypeButtons,
-  DocViewer
+  DocViewer,
+  PatientInfo
 } from 'components'
 
 import { useNavigate, useParams } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext, useParticipants } from "hooks"
-import { TDataProntuario } from "types"
+import { TDataProntuario, TPaciente } from "types"
 import { documentApi, documentApiWrapper } from "lib/api/document"
 
 type TProps = {
@@ -56,6 +57,7 @@ type TProps = {
 
 export const Room = ({ doctor }: TProps) => {
   // const [pacienteVideo, setPacienteVideo] = useState()
+  const [patient, setPatient] = useState<TPaciente>({} as TPaciente)
   const [openModalClinicalRecord, setOpenModalClinicalRecord] = useState(false)
   const [openModalRecipe, setOpenModalRecipe] = useState(false)
   const [screen, setScreen] = useState(false)
@@ -67,11 +69,19 @@ export const Room = ({ doctor }: TProps) => {
   const [templatesOptions, setTemplatesOptions] = useState<any[]>([]);
   const [selectedDocumentTemplate, setSelectedDocumentTemplate] = useState<any>();
   const [selectedType, setSelectedType] = useState({ value: [] });
+
   const { token } = useParams()
 
   const participants = useParticipants()
 
   const documentService = documentApi(token || '')
+
+
+  useEffect(() => {
+    const newPatient: TPaciente | null = JSON.parse(localStorage.getItem('patient') || '')
+
+    newPatient && setPatient(newPatient)
+  }, [])
 
   useEffect(() => {
     if (!isAwaitDoctor) {
@@ -136,7 +146,6 @@ export const Room = ({ doctor }: TProps) => {
 
   async function handleSave() {
     try {
-      debugger
       if (!datas) return
       const verifyModelExist = datas.documents.find(
         (document: any) =>
@@ -258,7 +267,9 @@ export const Room = ({ doctor }: TProps) => {
         )
       }
 
-
+      <PacientInfoContainer >
+        <PatientInfo patientInfos={patient} modalStyle isDoctorName />
+      </PacientInfoContainer>
 
       <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
         <ParticipantList />
@@ -272,9 +283,6 @@ export const Room = ({ doctor }: TProps) => {
       </SecondaryCam>
 
       <ChatWindow />
-      <PacientInfo >
-        <p>teste</p>
-      </PacientInfo>
 
       <ModalCustom
         open={openModalClinicalRecord}

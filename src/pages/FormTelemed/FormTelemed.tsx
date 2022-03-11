@@ -25,21 +25,14 @@ import {
 
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
-
-type TPaciente = {
-  name: string;
-  idade: number;
-  planoConvenio: string;
-  motivoConsulta: string;
-  doctorName?: string;
-}
+import { TPaciente } from "types"
 
 const initalPaciente: TPaciente = {
   name: 'Maria Luisa Machado dos santos',
   idade: 54,
   planoConvenio: 'Bradesco',
   motivoConsulta: 'Dor de garganta;Falta de ar',
-  doctorName: 'Matheus',
+  doctorName: 'Dr. Matheus',
 }
 
 
@@ -58,6 +51,10 @@ export const FormTelemd = () => {
     })
   }, [getAudioAndVideoTracks])
 
+  useEffect(() => {
+    localStorage.setItem('patient', JSON.stringify(paciente))
+  }, [paciente])
+
   const handleJoin = () => {
     if (!URLRoomName) return
     getToken(username, URLRoomName).then(({ access_token }) => {
@@ -70,7 +67,7 @@ export const FormTelemd = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} />
+      <PatientInfo patientInfos={paciente} title=" " />
       <ContainerSettings>
         <WebCam >
           <LocalVideoPreview identity={paciente.name} />

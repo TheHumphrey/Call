@@ -21,20 +21,14 @@ import { AudioInputList, PatientInfo } from "components"
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
-type TPaciente = {
-  name: string;
-  idade: number;
-  planoConvenio: string;
-  motivoConsulta: string;
-  doctorName?: string;
-}
+import { TPaciente } from "types"
 
 const initalPaciente: TPaciente = {
   name: 'Maria Luisa Machado dos santos',
   idade: 54,
   planoConvenio: 'Bradesco',
-  motivoConsulta: 'Dor de gargantaFalta de ar',
-  doctorName: 'Matheus',
+  motivoConsulta: 'Dor de cabeça, dor de barriga, dores nos braços',
+  doctorName: 'Dr. Matheus',
 }
 
 export const DoctorLobby = () => {
@@ -42,8 +36,11 @@ export const DoctorLobby = () => {
   const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const [username, setUsername] = useState('')
   const { URLRoomName } = useParams()
+
+  useEffect(() => {
+    localStorage.setItem('patient', JSON.stringify(paciente))
+  }, [paciente])
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -54,27 +51,20 @@ export const DoctorLobby = () => {
 
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(username, URLRoomName).then(({ access_token }) => {
+    getToken(paciente?.doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
       videoConnect(access_token)
       chatConnect(access_token)
     })
   }
 
-  const onChangeUsername = (event: string) => setUsername(event)
-
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} />
+      <PatientInfo patientInfos={paciente} title=" " />
       <ContainerSettings>
         <WebCam >
           <LocalVideoPreview identity={paciente?.doctorName || ' '} />
         </WebCam>
         <ContainerInput>
-          <Label>
-            Como gostaria de ser chamado?
-          </Label>
-          <UsernameInput onChange={(e) => onChangeUsername(e.target.value)} />
-
           <LabelCheck>
             <BsBagCheckFillCustom color="#2395FF" />
             Configra seu áudio e vídeo

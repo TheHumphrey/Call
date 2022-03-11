@@ -184,7 +184,7 @@ export const SideMenu = styled.div<TSecundaryCam>`
   border-radius: 4px;
 `
 
-export const PacientInfo = styled.div`
+export const PacientInfoContainer = styled.div`
   position: absolute;
 
   left: 10px;

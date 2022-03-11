@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
-export const ContainerTitle = styled.div`
+type TContainerProps = {
+  modalStyle?: boolean;
+}
+
+export const ContainerTitle = styled.div<TContainerProps>`
   display: flex;
   flex-direction: column;
   user-select: text;
 
-  margin-left: 45px;
+  ${({ modalStyle }) => modalStyle ? 'margin: 20px;' : 'margin-left: 45px;'}
 `
 
 export const Title = styled.h1`
@@ -35,4 +39,7 @@ export const SubText = styled.span`
   font-size: 18px;
   color: ${({ theme }) => theme.colors.grayLight};
   line-height: 21,09px;
+
+  white-space: normal;
+  word-break: break-all;
 `
