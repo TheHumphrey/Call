@@ -36,7 +36,7 @@ const AppDoctor = ({ roomState }: any) => (
       <DoctorLobby />
     ) : (
       <Main>
-        <Room />
+        <Room doctor />
       </Main>
     )}
   </>
@@ -52,7 +52,6 @@ const AppRouter = () => {
         <Route path="/" element={<RoomNotFound />} />
         <Route path="/:URLRoomName" element={<App roomState={roomState} />} />
         <Route path="/doctor/:token/:URLRoomName" element={<AppDoctor roomState={roomState} />} />
-        <Route path="/call" element={<Room />} />
       </Routes>
     </BrowserRouter>
   )
