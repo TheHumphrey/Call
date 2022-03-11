@@ -36,3 +36,5 @@ export { ClinicRegisterWrapper } from './ClinicRegisterWrapper/ClinicRegisterWra
 export { AllRegistersModal } from './ClinicRegisterWrapper/components/AllRegistersModal/AllRegistersModal'
 export { ClinicType } from './ClinicRegisterWrapper/components/ClinicType/ClinicType'
 export { DocViewer } from './DocViewer/DocViewer'
+
+export { PatientInfo } from './PatientInfo/PatientInfo'

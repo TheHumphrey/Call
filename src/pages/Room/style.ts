@@ -184,6 +184,17 @@ export const SideMenu = styled.div<TSecundaryCam>`
   border-radius: 4px;
 `
 
+export const PacientInfo = styled.div`
+  position: absolute;
+
+  left: 10px;
+  bottom: 10px;
+  z-index: 10;
+
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 4px;
+`
+
 export const SecondaryCam = styled.div<TSecundaryCam>`
   display: flex;
   width: 280px;

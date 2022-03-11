@@ -2,15 +2,11 @@ import { useEffect, useState } from "react"
 
 import {
   Container,
-  Title,
-  Text,
-  SubText,
   ContainerSettings,
   WebCam,
   UsernameInput,
   ContainerInput,
   ButtonJoin,
-  ContainerTitle,
   Label,
   DropdownContainer,
   BsBagCheckFillCustom,
@@ -21,7 +17,7 @@ import { useParams } from 'react-router-dom'
 
 import { LocalVideoPreview, ToggleAudioButton, ToggleVideoButton } from 'components'
 
-import { AudioInputList } from "components"
+import { AudioInputList, PatientInfo } from "components"
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
@@ -29,16 +25,17 @@ type TPaciente = {
   name: string;
   idade: number;
   planoConvenio: string;
-  motivoConsulta: string[];
+  motivoConsulta: string;
+  doctorName?: string;
 }
 
 const initalPaciente: TPaciente = {
   name: 'Maria Luisa Machado dos santos',
   idade: 54,
   planoConvenio: 'Bradesco',
-  motivoConsulta: ['Dor de garganta', 'Falta de ar']
+  motivoConsulta: 'Dor de gargantaFalta de ar',
+  doctorName: 'Matheus',
 }
-
 
 export const DoctorLobby = () => {
   const [paciente, setPaciente] = useState<TPaciente>(initalPaciente)
@@ -46,7 +43,7 @@ export const DoctorLobby = () => {
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
-  const { URLRoomName, token } = useParams()
+  const { URLRoomName } = useParams()
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -63,42 +60,14 @@ export const DoctorLobby = () => {
     })
   }
 
-  const getMotivo = (arr: string[]) => {
-    let text = ''
-    arr.map(item => text += item + '; ')
-    return text
-  }
-
   const onChangeUsername = (event: string) => setUsername(event)
 
   return (
     <Container>
-      <ContainerTitle>
-        <Title>{' '}</Title>
-        <Text>
-          Medico:{' '}
-          <SubText>Matheus</SubText>
-        </Text>
-        <Text>
-          Paciente:{' '}
-          <SubText>{paciente.name}</SubText>
-        </Text>
-        <Text>
-          Idade:{' '}
-          <SubText>{paciente.idade} anos</SubText>
-        </Text>
-        <Text>
-          Plano convênio:{' '}
-          <SubText>{paciente.planoConvenio}</SubText>
-        </Text>
-        <Text>
-          Motivo consulta:{' '}
-          <SubText>{getMotivo(paciente.motivoConsulta)}</SubText>
-        </Text>
-      </ContainerTitle>
+      <PatientInfo patientInfos={paciente} />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={paciente.name} />
+          <LocalVideoPreview identity={paciente?.doctorName || ' '} />
         </WebCam>
         <ContainerInput>
           <Label>

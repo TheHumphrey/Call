@@ -26,6 +26,7 @@ import {
   ModalCustom,
   ModalBox,
   XIcon,
+  PacientInfo,
 } from './style'
 
 import {
@@ -238,21 +239,26 @@ export const Room = ({ doctor }: TProps) => {
         </CallButton>
 
       </BottomMenu>
+      {
+        doctor && (
+          <SideMenu isChatWindowOpen={isChatWindowOpen}>
 
-      <SideMenu isChatWindowOpen={isChatWindowOpen}>
+            <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
+              <ClipIcon />
+            </CallButton>
 
-        <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
-          <ClipIcon />
-        </CallButton>
+            <CallButton>
+              <FileIcon onClick={() => setOpenModalRecipe(true)} />
+            </CallButton>
 
-        <CallButton>
-          <FileIcon onClick={() => setOpenModalRecipe(true)} />
-        </CallButton>
+            <CallButton>
+              <BottleIcon />
+            </CallButton>
+          </SideMenu>
+        )
+      }
 
-        <CallButton>
-          <BottleIcon />
-        </CallButton>
-      </SideMenu>
+
 
       <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
         <ParticipantList />
@@ -266,6 +272,9 @@ export const Room = ({ doctor }: TProps) => {
       </SecondaryCam>
 
       <ChatWindow />
+      <PacientInfo >
+        <p>teste</p>
+      </PacientInfo>
 
       <ModalCustom
         open={openModalClinicalRecord}
