@@ -30,6 +30,7 @@ export const Button = styled.button<TButtonProps>`
   border-radius: 8px;
   font-style: normal;
   font-weight: normal;
+  font-family: 'Roboto';
   font-size: ${getFontSize};
   line-height: 16px;
   color: ${getColor};

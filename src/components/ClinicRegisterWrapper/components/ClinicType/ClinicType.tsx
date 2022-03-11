@@ -12,6 +12,8 @@ import {
   ButtonMoreRegister,
   ReferContainer,
   NewRegisterText,
+  ClinicTypesContainer,
+  RegisterWrapper,
 } from "./style";
 
 interface Props {
@@ -21,12 +23,12 @@ interface Props {
 }
 
 export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Props) => {
-  function renderRegister(datas: any, name: any) {
+  function renderRegister(datas: any, name: any, index?: any) {
     const lastDocument = datas[datas.length - 1];
 
     if (lastDocument) {
       return (
-        <RegisterContainer>
+        <RegisterContainer index={index}>
           <Date>{formatDate(lastDocument?.createdAt)}</Date>
           <Register>{lastDocument?.data}</Register>
         </RegisterContainer>
@@ -34,7 +36,7 @@ export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Pr
     }
 
     return (
-      <RegisterContainer withoutRegister>
+      <RegisterContainer withoutRegister index={index}>
         <Register>{`Não existe registro de ${name} para o último atendimento`}</Register>
       </RegisterContainer>
     );
@@ -43,30 +45,27 @@ export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Pr
     <Container>
       {clinicTypes.map((type: any, index: any) => {
         return (
-          <div style={{ display: "flex", marginBottom: "16px" }}>
-            <TypeNameContainer>
+          <ClinicTypesContainer>
+            <TypeNameContainer index={index}>
               <Name>{type.name}</Name>
             </TypeNameContainer>
 
             <RegisterContainerWrapper>
-              <div style={{ display: "flex", position: "relative" }}>
+              <RegisterWrapper>
                 {index === 0 && (
                   <ReferContainer>
                     <Text>Registros do último atendimento:</Text>
-                    <ButtonMoreRegister onClick={() => setToggleModal(true)}>
-                      MAIS REGISTROS
-                    </ButtonMoreRegister>
                   </ReferContainer>
                 )}
 
                 {index === 0 && <NewRegisterText>Registro atual:</NewRegisterText>}
 
-                {renderRegister(type.data, type.name)}
+                {renderRegister(type.data, type.name, index)}
 
-                <NewRegisterArea onChange={(event: any) => onChangeDocument(event.target.value, type.type)} />
-              </div>
+                <NewRegisterArea index={index} onChange={(event: any) => onChangeDocument(event.target.value, type.type)} />
+              </RegisterWrapper>
             </RegisterContainerWrapper>
-          </div>
+          </ClinicTypesContainer>
         );
       })}
     </Container>

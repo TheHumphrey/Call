@@ -9,6 +9,7 @@ import {
   Container,
   ButtonContainer
 } from "./style"
+import { useDocuments } from "hooks"
 
 const clinicRegisterTypes = [
   { name: "ANAMNESE", value: "subjective" },
@@ -29,6 +30,7 @@ export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave, token }: T
   const [clinicTypes, setClinicTypes] = useState<any[]>([])
   const [newDocuments, setNewDocuments] = useState<any[]>([])
   const documentService = documentApi(token)
+  const { setStatusToProgress } = useDocuments()
 
   useEffect(() => {
     if (datas) {
@@ -49,7 +51,7 @@ export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave, token }: T
 
   function onChangeDocument(value: any, type: any) {
     const typeAlredyExist = newDocuments.find(data => data.type === type)
-
+    setStatusToProgress("clinicalRecord")
     if (typeAlredyExist) {
       const newData = newDocuments.filter(data => data.type !== type)
       setNewDocuments([...newData, { type, data: value }])
@@ -57,6 +59,7 @@ export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave, token }: T
       setNewDocuments([...newDocuments, { type, data: value }])
     }
   }
+
   async function onClickSave() {
     const filteredData = newDocuments.filter(document => document.data)
 

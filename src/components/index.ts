@@ -35,3 +35,6 @@ export { BaseButton } from './BaseButton/BaseButton'
 export { ClinicRegisterWrapper } from './ClinicRegisterWrapper/ClinicRegisterWrapper'
 export { AllRegistersModal } from './ClinicRegisterWrapper/components/AllRegistersModal/AllRegistersModal'
 export { ClinicType } from './ClinicRegisterWrapper/components/ClinicType/ClinicType'
+export { DocViewer } from './DocViewer/DocViewer'
+
+export { PatientInfo } from './PatientInfo/PatientInfo'

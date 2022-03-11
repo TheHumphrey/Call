@@ -239,3 +239,13 @@ export type TDataProntuario = {
   procedures: IProcedures[];
   professional: TProfessional;
 }
+
+export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
+
+export type TPaciente = {
+  name: string;
+  idade: number;
+  planoConvenio: string;
+  motivoConsulta: string;
+  doctorName?: string;
+}

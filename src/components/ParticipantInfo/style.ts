@@ -11,7 +11,7 @@ export const Container = styled.div<TContainer>`
   height: 0;
   overflow: hidden;
   border-radius: 4px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 2px solid ${({ theme }) => theme.colors.white};
   padding-top: ${'calc(65% - 2px)'};
   background: black;
   :hover {
