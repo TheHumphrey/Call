@@ -70,7 +70,7 @@ export const Room = ({ doctor }: TProps) => {
   const [selectedDocumentTemplate, setSelectedDocumentTemplate] = useState<any>();
   const [selectedType, setSelectedType] = useState({ value: [] });
 
-  const { token } = useParams()
+  const token = localStorage.getItem('token')
 
   const participants = useParticipants()
 

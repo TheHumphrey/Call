@@ -22,6 +22,7 @@ import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
 import { TPaciente } from "types"
+// import { patientAPI } from "utils/axios"
 
 const initalPaciente: TPaciente = {
   name: 'Maria Luisa Machado dos santos',
@@ -32,15 +33,20 @@ const initalPaciente: TPaciente = {
 }
 
 export const DoctorLobby = () => {
-  const [paciente, setPaciente] = useState<TPaciente>(initalPaciente)
+  const [paciente, setPaciente] = useState<TPaciente>({} as TPaciente)
   const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const { URLRoomName } = useParams()
+  const { URLRoomName, token } = useParams()
+
+  useEffect(() => {
+    getPatient()
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('patient', JSON.stringify(paciente))
-  }, [paciente])
+    token && localStorage.setItem('token', token)
+  }, [paciente, token])
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -48,6 +54,11 @@ export const DoctorLobby = () => {
       console.dir(error)
     })
   }, [getAudioAndVideoTracks])
+
+  const getPatient = () => {
+    setPaciente(initalPaciente)
+    // patientAPI.post<TPaciente>('/patientset', paciente).then(({ data }) => localStorage.setItem('patient', JSON.stringify(data)))
+  }
 
   const handleJoin = () => {
     if (!URLRoomName) return
