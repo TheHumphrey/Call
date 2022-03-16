@@ -6,6 +6,10 @@ type TIconButton = {
   isEnable?: boolean;
 }
 
+type TLabel = {
+  withMargin?: boolean;
+}
+
 export const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -33,7 +37,7 @@ export const ContainerInput = styled.div`
   margin-top: 100px;
 `
 
-export const Label = styled.label`
+export const Label = styled.label<TLabel>`
   width: 420px;
   height: 24px;
 
@@ -44,6 +48,8 @@ export const Label = styled.label`
   line-height: 21px;
   display: flex;
   align-items: center;
+
+  ${({ withMargin }) => withMargin && 'margin-top: 10px;'}
 
   color: ${({ theme }) => theme.colors.grayDark};
 `

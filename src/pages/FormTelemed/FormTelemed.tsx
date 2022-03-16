@@ -26,23 +26,27 @@ import {
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 import { TPaciente } from "types"
+import { patientAPI } from "utils/axios"
 
 const initalPaciente: TPaciente = {
   name: 'Maria Luisa Machado dos santos',
   idade: 54,
   planoConvenio: 'Bradesco',
-  motivoConsulta: 'Dor de garganta;Falta de ar',
   doctorName: 'Dr. Matheus',
 }
 
 
 export const FormTelemd = () => {
-  const [paciente, setPaciente] = useState<TPaciente>(initalPaciente)
+  const [paciente, setPaciente] = useState<TPaciente>({} as TPaciente)
   const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
   const { URLRoomName } = useParams()
+
+  useEffect(() => {
+    getPatient()
+  }, [])
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -55,15 +59,26 @@ export const FormTelemd = () => {
     localStorage.setItem('patient', JSON.stringify(paciente))
   }, [paciente])
 
+  const getPatient = () => {
+    setPaciente(initalPaciente)
+  }
+
   const handleJoin = () => {
     if (!URLRoomName) return
     getToken(username, URLRoomName).then(({ access_token }) => {
       videoConnect(access_token)
       chatConnect(access_token)
     })
+    updatePatientInfo()
   }
 
-  const onChangeUsername = (event: string) => setUsername(event)
+  const updatePatientInfo = async () => {
+    patientAPI.post<TPaciente>('/patientset', paciente).then()
+  }
+
+  const onChangeUsername = (value: string) => setUsername(value)
+
+  const onChangeMotivoConsulta = (value: string) => setPaciente({ ...paciente, motivoConsulta: value })
 
   return (
     <Container>
@@ -77,6 +92,11 @@ export const FormTelemd = () => {
             Como gostaria de ser chamado?
           </Label>
           <UsernameInput onChange={(e) => onChangeUsername(e.target.value)} />
+
+          <Label withMargin>
+            Motivo da consulta? (ex: Dor de cabeça, Náusea)
+          </Label>
+          <UsernameInput onChange={(e) => onChangeMotivoConsulta(e.target.value)} />
 
           <LabelCheck>
             <BsBagCheckFillCustom color="#2395FF" />

@@ -246,6 +246,6 @@ export type TPaciente = {
   name: string;
   idade: number;
   planoConvenio: string;
-  motivoConsulta: string;
+  motivoConsulta?: string;
   doctorName?: string;
 }
