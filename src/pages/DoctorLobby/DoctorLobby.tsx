@@ -21,26 +21,19 @@ import { AudioInputList, PatientInfo } from "components"
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
-import { TPaciente } from "types"
-// import { patientAPI } from "utils/axios"
-
-const initalPaciente: TPaciente = {
-  name: 'Maria Luisa Machado dos santos',
-  idade: 54,
-  planoConvenio: 'Bradesco',
-  motivoConsulta: 'Dor de cabeça, dor de barriga, dores nos braços',
-  doctorName: 'Dr. Matheus',
-}
+import { TAttendance, TPatient } from "types"
+import { attendanceApi, clinicApi } from "utils/axios"
 
 export const DoctorLobby = () => {
-  const [paciente, setPaciente] = useState<TPaciente>({} as TPaciente)
+  const [paciente, setPaciente] = useState<TPatient>({} as TPatient)
   const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const { URLRoomName, token } = useParams()
+  const { URLRoomName, token, patientId } = useParams()
 
   useEffect(() => {
     getPatient()
+    getAttendance()
   }, [])
 
   useEffect(() => {
@@ -55,9 +48,34 @@ export const DoctorLobby = () => {
     })
   }, [getAudioAndVideoTracks])
 
-  const getPatient = () => {
-    setPaciente(initalPaciente)
-    // patientAPI.post<TPaciente>('/patientset', paciente).then(({ data }) => localStorage.setItem('patient', JSON.stringify(data)))
+  const getPatient = async () => {
+    if (!token || !patientId) return
+
+    const clinicService = clinicApi(token)
+    await clinicService
+      .get<TPatient[]>(`/patients`).then(
+        ({ data }) => {
+          const patient = data.find(item => item.id === patientId)
+          localStorage.setItem('patient', JSON.stringify(patient || ''))
+          if (!patient) return
+          setPaciente(patient)
+        }
+      )
+  }
+
+  const getAttendance = async () => {
+    if (!token || !patientId) return
+    const dateTime = new Date()
+    const today = `${dateTime.getFullYear()}-${(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
+
+    const attendanceService = attendanceApi(token)
+    await attendanceService
+      .get<TAttendance[]>(`/attendances?readyAt=true&createdAt=${today}`).then(
+        ({ data }) => {
+          const attendance = data.find(item => item.patientId === patientId)
+          localStorage.setItem('attendance', JSON.stringify(attendance || ''))
+        }
+      )
   }
 
   const handleJoin = () => {

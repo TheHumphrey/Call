@@ -48,7 +48,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext, useParticipants } from "hooks"
-import { TDataProntuario, TPaciente } from "types"
+import { TDataProntuario, TPatient } from "types"
 import { documentApi, documentApiWrapper } from "lib/api/document"
 
 type TProps = {
@@ -57,7 +57,7 @@ type TProps = {
 
 export const Room = ({ doctor }: TProps) => {
   // const [pacienteVideo, setPacienteVideo] = useState()
-  const [patient, setPatient] = useState<TPaciente>({} as TPaciente)
+  const [patient, setPatient] = useState<TPatient>({} as TPatient)
   const [openModalClinicalRecord, setOpenModalClinicalRecord] = useState(false)
   const [openModalRecipe, setOpenModalRecipe] = useState(false)
   const [screen, setScreen] = useState(false)
@@ -78,7 +78,7 @@ export const Room = ({ doctor }: TProps) => {
 
 
   useEffect(() => {
-    const newPatient: TPaciente | null = JSON.parse(localStorage.getItem('patient') || '')
+    const newPatient: TPatient | null = JSON.parse(localStorage.getItem('patient') || '')
 
     newPatient && setPatient(newPatient)
   }, [])

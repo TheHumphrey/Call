@@ -5,10 +5,11 @@ import {
   SubText,
 } from "./style"
 
-import { TPaciente } from "types"
+import { TPatient } from "types"
+import { getCurrentAge } from "utils/helpers"
 
 type TProps = {
-  patientInfos: TPaciente;
+  patientInfos: TPatient;
   title?: string;
   modalStyle?: boolean;
   isDoctorName?: boolean;
@@ -23,10 +24,10 @@ export const PatientInfo = (props: TProps) => {
   } = props
 
   const {
-    name,
-    idade,
-    planoConvenio,
-    motivoConsulta,
+    fullname,
+    birthdate,
+    healthPlans,
+    reason,
     doctorName
   } = patientInfos
 
@@ -38,30 +39,30 @@ export const PatientInfo = (props: TProps) => {
       {!isDoctorName && (
         <Text>
           Medico:{' '}
-          <SubText>{doctorName}</SubText>
+          <SubText>{doctorName || ''}</SubText>
         </Text>
       )}
 
       <Text>
         Paciente:{' '}
-        <SubText>{name}</SubText>
+        <SubText>{fullname || ''}</SubText>
       </Text>
 
       <Text>
         Idade:{' '}
-        <SubText>{idade} anos</SubText>
+        <SubText>{getCurrentAge(birthdate) || ''} anos</SubText>
       </Text>
 
-      <Text>
+      {/* <Text>
         Plano convênio:{' '}
-        <SubText>{planoConvenio}</SubText>
-      </Text>
+        <SubText>{healthPlans}</SubText>
+      </Text> */}
 
       {
-        motivoConsulta && (
+        reason && (
           <Text>
             Motivo consulta:{' '}
-            <SubText>{motivoConsulta}</SubText>
+            <SubText>{reason || ''}</SubText>
           </Text>
         )
       }

@@ -68,7 +68,7 @@ type TProcedures = {
   updatedAt: string;
 }
 
-type TAttendance = {
+export type TAttendance = {
   canceledAt: any;
   createdAt: string;
   deletedAt: string;
@@ -91,7 +91,7 @@ type TPhones = {
   updatedAt: string;
 }
 
-type TPatient = {
+export type TPatient = {
   addresses: TAdress[]
   allergies: any[]
   birthdate: string;
@@ -115,6 +115,8 @@ type TPatient = {
   socialName: any;
   specialNeeds: any;
   updatedAt: string;
+  doctorName?: string;
+  reason?: string;
 }
 
 interface IProcedures {
@@ -241,11 +243,3 @@ export type TDataProntuario = {
 }
 
 export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
-
-export type TPaciente = {
-  name: string;
-  idade: number;
-  planoConvenio: string;
-  motivoConsulta?: string;
-  doctorName?: string;
-}

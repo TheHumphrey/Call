@@ -5,6 +5,8 @@ export const initAxios = (moduleUrl: string, token: string): AxiosInstance => {
     baseURL: `${moduleUrl}api/`
   });
 
+  console.log(moduleUrl)
+
   axiosInstance.interceptors.request.use((config: any) => {
     if (token) {
       config.headers["x-access-token"] = token;

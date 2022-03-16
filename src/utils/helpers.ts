@@ -224,3 +224,20 @@ export const textMask = (value: any) => {
     return value;
   }
 };
+
+export const getCurrentAge = (date: string) => {
+  const dateNow = new Date()
+
+  const userDay = parseInt(date.split('/')[0])
+  const userMonth = parseInt(date.split('/')[1])
+  const userYear = parseInt(date.split('/')[2])
+
+  const todayMonth = dateNow.getMonth() + 1
+  const today = dateNow.getDate()
+
+  let currentAge = dateNow.getFullYear() - userYear
+
+  if (todayMonth < userMonth || (todayMonth === userMonth && today < userDay)) currentAge--
+
+  return currentAge
+}
