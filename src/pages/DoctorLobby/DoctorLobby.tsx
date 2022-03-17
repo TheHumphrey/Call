@@ -23,8 +23,10 @@ export const DoctorLobby = () => {
   const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const { patient } = useDoctorContext()
+  const { patient, doctor } = useDoctorContext()
   const { URLRoomName } = useParams()
+
+  const doctorName = `Dr. ${doctor?.user?.name}`
 
   useEffect(() => {
     localStorage.setItem('URLRoomName', JSON.stringify(URLRoomName))
@@ -39,7 +41,7 @@ export const DoctorLobby = () => {
 
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(patient?.doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
+    getToken(doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
       videoConnect(access_token)
       chatConnect(access_token)
     })
@@ -47,10 +49,10 @@ export const DoctorLobby = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={patient} title=" " />
+      <PatientInfo patientInfos={patient} title=" " doctorName="doctorName" />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={patient?.doctorName || ' '} />
+          <LocalVideoPreview identity={doctorName || ' '} />
         </WebCam>
         <ContainerInput>
           <LabelCheck>

@@ -173,7 +173,7 @@ export const SideMenu = styled.div<TSecundaryCam>`
   display: flex;
   flex-direction: column;
   width: 56px;
-  height: 168px;
+  height: 112px;
   position: absolute;
 
   right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '22%' : '2%'};

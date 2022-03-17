@@ -10,6 +10,7 @@ import { getCurrentAge } from "utils/helpers"
 
 type TProps = {
   patientInfos: TPatient;
+  doctorName?: string;
   title?: string;
   modalStyle?: boolean;
   isDoctorName?: boolean;
@@ -20,15 +21,15 @@ export const PatientInfo = (props: TProps) => {
     patientInfos,
     title,
     modalStyle,
-    isDoctorName
+    isDoctorName,
+    doctorName
   } = props
 
   const {
     fullname,
     birthdate,
-    healthPlans,
+    // healthPlans,
     reason,
-    doctorName
   } = patientInfos
 
   return (
@@ -36,10 +37,10 @@ export const PatientInfo = (props: TProps) => {
 
       {title && <Title>{title}</Title>}
 
-      {!isDoctorName && (
+      {isDoctorName && (
         <Text>
           Medico:{' '}
-          <SubText>{doctorName || ''}</SubText>
+          <SubText>{doctorName ? `Dr. ${doctorName}` : ''}</SubText>
         </Text>
       )}
 

@@ -7,3 +7,7 @@ export const attendanceApi = (token: string) => initAxios(ATTENDANCE_API, token)
 const CLINIC_API = process.env.REACT_APP_CLINIC_API as string
 
 export const clinicApi = (token: string) => initAxios(CLINIC_API, token)
+
+const ACCESS_API = process.env.REACT_APP_ACCESS_API as string
+
+export const accessApi = (token: string) => initAxios(ACCESS_API, token)

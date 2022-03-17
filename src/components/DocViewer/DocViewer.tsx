@@ -1,11 +1,16 @@
-import React from "react";
-
 import { Editor } from "lib/components/Editor/Editor";
-import { Select, EditorContainer, SelectContainer, Container } from "./style";
+import {
+  Select,
+  EditorContainer,
+  SelectContainer,
+  Container,
+  NotFoundDocument,
+} from "./style";
+import { TDocumentTemplate } from "types";
 
 interface Props {
   templatesOptions: any,
-  selectedDocumentTemplate: any,
+  selectedDocumentTemplate: TDocumentTemplate,
   setSelectedDocumentTemplate: any,
   changeEditorState: any,
   handleSave: any,
@@ -18,29 +23,33 @@ export const DocViewer = ({
   changeEditorState,
   handleSave,
 }: Props) => {
+  const isRender = templatesOptions?.length > 0
   return (
     <Container>
       <SelectContainer>
-        {templatesOptions?.length > 0 && (
+        {isRender && (
           <Select
             placeholder="Modelo de documento"
             options={templatesOptions}
-            value={selectedDocumentTemplate ? selectedDocumentTemplate : ""}
+            value={selectedDocumentTemplate}
             onChange={(event: any) => setSelectedDocumentTemplate(event)}
           />
         )}
       </SelectContainer>
 
-      <EditorContainer>
-        {selectedDocumentTemplate && (
+      <EditorContainer isNotFound={!isRender}>
+        {isRender && selectedDocumentTemplate && (
           <Editor
-            data={selectedDocumentTemplate?.data}
+            data={selectedDocumentTemplate?.data || ""}
             title="Edite o arquivo no espaço abaixo"
             changeState={changeEditorState}
             saveCallback={() => handleSave()}
             saveTopButton={true}
           />
         )}
+        {!isRender && (<>
+          <NotFoundDocument>Não existe nenhum modelo cadastrado pare esse documento.</NotFoundDocument>
+        </>)}
       </EditorContainer>
     </Container>
   );

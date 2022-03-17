@@ -235,27 +235,65 @@ type TProfessional = {
   updatedAt: string;
 }
 
+export type TDocuments = {
+  attendanceId?: any;
+  createdAt?: string;
+  data?: string;
+  date?: string;
+  id?: number | null;
+  patientId?: string;
+  procedureId?: any;
+  professionalId?: string;
+  title?: any;
+  type?: string;
+  updatedAt?: string;
+}
+
 export type TDataProntuario = {
   attendance: TAttendance;
-  documents: any[];
+  documents: TDocuments[];
   patient: TPatient;
   procedures: IProcedures[];
   professional: TProfessional;
 }
 
+export type TDoctor = {
+  exp: number;
+  iat: number;
+  tenant: string;
+  user: {
+    avatarUrl: any;
+    createdAt: string;
+    deletedAt: any;
+    email: string;
+    id: string;
+    name: string;
+    permissions: any[];
+    professionalId: string;
+    rolesIds: string[]
+    token: any;
+    updatedAt: string;
+    username: string;
+  }
+}
+
 export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
 
 export type TDoctorProviderContext = {
+  authToken: string;
   attendances: TAttendance[];
   setAttendances: React.Dispatch<React.SetStateAction<TAttendance[]>>;
   currentAttendance: TAttendance;
   setCurrentAttendance: React.Dispatch<React.SetStateAction<TAttendance>>;
   patient: TPatient;
   setPatient: React.Dispatch<React.SetStateAction<TPatient>>;
+  doctor: TDoctor;
+  setDoctor: React.Dispatch<React.SetStateAction<TDoctor>>;
   datas: TDataProntuario;
   setDatas: React.Dispatch<React.SetStateAction<TDataProntuario>>;
   getPatient(): Promise<void>;
   getAttendance(): Promise<void>;
+  getDoctorData(): Promise<void>;
   changeEditorState(state: any): void;
   selectedDocumentTemplate: any;
   setSelectedDocumentTemplate: React.Dispatch<React.SetStateAction<any>>;
@@ -265,5 +303,13 @@ export type TDoctorProviderContext = {
   setTemplatesOptions: React.Dispatch<React.SetStateAction<any[]>>;
   getDocumentsAfterSave(): Promise<void>;
   getModelsByType(object?: any): Promise<void>;
-  handleSave(): Promise<void>
+  handleSave(): Promise<void>;
+}
+
+export type TDocumentTemplate = {
+  data: string;
+  id: number;
+  label: string;
+  value: number;
+  type: string;
 }

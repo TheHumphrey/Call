@@ -57,7 +57,6 @@ type TProps = {
 
 export const Room = ({ doctor }: TProps) => {
   // const [pacienteVideo, setPacienteVideo] = useState()
-  const [patient, setPatient] = useState<TPatient>({} as TPatient)
   const [openModalClinicalRecord, setOpenModalClinicalRecord] = useState(false)
   const [openModalRecipe, setOpenModalRecipe] = useState(false)
   const [screen, setScreen] = useState(false)
@@ -67,6 +66,8 @@ export const Room = ({ doctor }: TProps) => {
   const [selectedType, setSelectedType] = useState({ value: [] });
 
   const {
+    patient,
+    setPatient,
     datas,
     setDatas,
     changeEditorState,
@@ -87,7 +88,7 @@ export const Room = ({ doctor }: TProps) => {
   useEffect(() => {
     const newPatient: TPatient | null = JSON.parse(localStorage.getItem('patient') || '')
 
-    newPatient && setPatient(newPatient)
+    newPatient && setPatient({ ...patient, ...newPatient })
   }, [])
 
   useEffect(() => {
@@ -197,25 +198,24 @@ export const Room = ({ doctor }: TProps) => {
       {
         doctor && (
           <SideMenu isChatWindowOpen={isChatWindowOpen}>
-
             <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
-              <ClipIcon />
+              <FileIcon />
             </CallButton>
 
             <CallButton>
-              <FileIcon onClick={() => setOpenModalRecipe(true)} />
-            </CallButton>
-
-            <CallButton>
-              <BottleIcon />
+              <BottleIcon onClick={() => setOpenModalRecipe(true)} />
             </CallButton>
           </SideMenu>
         )
       }
 
-      <PacientInfoContainer >
-        <PatientInfo patientInfos={patient} modalStyle isDoctorName />
-      </PacientInfoContainer>
+      {
+        doctor && (
+          <PacientInfoContainer >
+            <PatientInfo patientInfos={patient} modalStyle />
+          </PacientInfoContainer>
+        )
+      }
 
       <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
         <ParticipantList />
@@ -240,7 +240,7 @@ export const Room = ({ doctor }: TProps) => {
           >
             <ModalBox>
               <XIcon onClick={() => setOpenModalClinicalRecord(false)} />
-              <ClinicRegisterWrapper datas={datas!} getDocumentsAfterSave={getDocumentsAfterSave} token="aa" />
+              <ClinicRegisterWrapper datas={datas} getDocumentsAfterSave={getDocumentsAfterSave} />
             </ModalBox>
           </ModalCustom>
 
