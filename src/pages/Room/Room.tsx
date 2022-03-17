@@ -118,7 +118,7 @@ export const Room = ({ doctor }: TProps) => {
     room?.disconnect()
     setIsAwaitDoctor(false)
 
-    history('/', { replace: true })
+    history('/callend', { replace: true })
   }
 
   const handleFullscreen = () => {

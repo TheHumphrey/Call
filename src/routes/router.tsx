@@ -50,6 +50,7 @@ const AppRouter = () => {
         <Route path="/" element={<RoomNotFound />} />
         <Route path="/:URLRoomName" element={<App roomState={roomState} />} />
         <Route path="/doctor/:token/:URLRoomName/:patientId" element={<AppDoctor roomState={roomState} />} />
+        <Route path="/callend" element={<RoomNotFound isCallEnd />} />
       </Routes>
     </BrowserRouter>
   )
