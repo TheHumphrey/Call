@@ -1,3 +1,4 @@
+import React from 'react';
 import { TwilioError, Track, VideoBandwidthProfileOptions, LocalVideoTrack, RemoteVideoTrack } from 'twilio-video'
 
 declare module 'twilio-video' {
@@ -243,3 +244,26 @@ export type TDataProntuario = {
 }
 
 export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
+
+export type TDoctorProviderContext = {
+  attendances: TAttendance[];
+  setAttendances: React.Dispatch<React.SetStateAction<TAttendance[]>>;
+  currentAttendance: TAttendance;
+  setCurrentAttendance: React.Dispatch<React.SetStateAction<TAttendance>>;
+  patient: TPatient;
+  setPatient: React.Dispatch<React.SetStateAction<TPatient>>;
+  datas: TDataProntuario;
+  setDatas: React.Dispatch<React.SetStateAction<TDataProntuario>>;
+  getPatient(): Promise<void>;
+  getAttendance(): Promise<void>;
+  changeEditorState(state: any): void;
+  selectedDocumentTemplate: any;
+  setSelectedDocumentTemplate: React.Dispatch<React.SetStateAction<any>>;
+  typeDocumentSelected: any;
+  setTypeDocumentSelected: React.Dispatch<React.SetStateAction<any>>;
+  templatesOptions: any[];
+  setTemplatesOptions: React.Dispatch<React.SetStateAction<any[]>>;
+  getDocumentsAfterSave(): Promise<void>;
+  getModelsByType(object?: any): Promise<void>;
+  handleSave(): Promise<void>
+}

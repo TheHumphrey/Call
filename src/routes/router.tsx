@@ -9,8 +9,7 @@ import {
 } from 'pages'
 
 import { useRoomState } from 'hooks'
-import { ClinicRegisterWrapper } from 'components'
-import { TDataProntuario } from 'types'
+import { DoctorProvider } from 'components'
 
 const Main = styled.main`
   overflow: 'hidden';
@@ -19,7 +18,7 @@ const Main = styled.main`
 `
 
 const App = ({ roomState }: any) => (
-  <>
+  <DoctorProvider>
     {roomState === 'disconnected' ? (
       <FormTelemd />
     ) : (
@@ -27,11 +26,11 @@ const App = ({ roomState }: any) => (
         <Room />
       </Main>
     )}
-  </>
+  </DoctorProvider>
 );
 
 const AppDoctor = ({ roomState }: any) => (
-  <>
+  <DoctorProvider>
     {roomState === 'disconnected' ? (
       <DoctorLobby />
     ) : (
@@ -39,7 +38,7 @@ const AppDoctor = ({ roomState }: any) => (
         <Room doctor />
       </Main>
     )}
-  </>
+  </DoctorProvider>
 );
 
 const AppRouter = () => {
@@ -48,7 +47,6 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/formtest" element={<ClinicRegisterWrapper datas={{} as TDataProntuario} getDocumentsAfterSave={() => { }} token="aa" />} />
         <Route path="/" element={<RoomNotFound />} />
         <Route path="/:URLRoomName" element={<App roomState={roomState} />} />
         <Route path="/doctor/:token/:URLRoomName/:patientId" element={<AppDoctor roomState={roomState} />} />

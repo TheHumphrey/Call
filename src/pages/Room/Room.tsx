@@ -42,12 +42,12 @@ import {
   ClinicRegisterWrapper,
   FormTypeButtons,
   DocViewer,
-  PatientInfo
+  PatientInfo,
 } from 'components'
 
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
-import { useChatContext, useVideoContext, useParticipants } from "hooks"
+import { useChatContext, useVideoContext, useParticipants, useDoctorContext } from "hooks"
 import { TDataProntuario, TPatient } from "types"
 import { documentApi, documentApiWrapper } from "lib/api/document"
 
@@ -64,17 +64,24 @@ export const Room = ({ doctor }: TProps) => {
   const [currentTime, setCurrentTime] = useState(0)
   const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
 
-  const [datas, setDatas] = useState<TDataProntuario>()
-  const [typeDocumentSelected, setTypeDocumentSelected] = useState<any>()
-  const [templatesOptions, setTemplatesOptions] = useState<any[]>([]);
-  const [selectedDocumentTemplate, setSelectedDocumentTemplate] = useState<any>();
   const [selectedType, setSelectedType] = useState({ value: [] });
 
-  const token = localStorage.getItem('token')
+  const {
+    datas,
+    setDatas,
+    changeEditorState,
+    selectedDocumentTemplate,
+    setSelectedDocumentTemplate,
+    templatesOptions,
+    setTemplatesOptions,
+    typeDocumentSelected,
+    setTypeDocumentSelected,
+    getDocumentsAfterSave,
+    getModelsByType,
+    handleSave,
+  } = useDoctorContext()
 
   const participants = useParticipants()
-
-  const documentService = documentApi(token || '')
 
 
   useEffect(() => {
@@ -116,67 +123,6 @@ export const Room = ({ doctor }: TProps) => {
   const handleFullscreen = () => {
     screen ? document.exitFullscreen() : document.documentElement.requestFullscreen()
     setScreen(!screen)
-  }
-
-  const getDocumentsAfterSave = async () => {
-    const documents = await documentService.get(`/documents?patient=${datas?.patient?.id}`);
-
-    setDatas((prev: any) => ({ ...prev, documents: documents.data.reverse() }));
-  }
-
-  const getModelsByType = async (object?: any) => {
-    setTemplatesOptions([])
-    setSelectedDocumentTemplate(null)
-    const response = await documentApiWrapper.getDocumentTemplateByType('', documentService)
-    const newTemplatesOptions = response.map((item: any) => ({
-      value: item.id,
-      label: item.name,
-      data: item.data,
-      id: item.id,
-    }))
-
-    setTemplatesOptions(newTemplatesOptions)
-  }
-
-  const changeEditorState = (state: any) => {
-    const newData = { ...selectedDocumentTemplate };
-    newData.data = state;
-    setSelectedDocumentTemplate(newData);
-  }
-
-  async function handleSave() {
-    try {
-      if (!datas) return
-      const verifyModelExist = datas.documents.find(
-        (document: any) =>
-          datas.attendance.createdAt === document.date &&
-          typeDocumentSelected === document.type &&
-          datas.professional.id === document.professionalId &&
-          datas.patient.id === document.patientId
-      );
-
-      let data = {
-        type: typeDocumentSelected,
-        professionalId: datas.professional.id,
-        patientId: datas.patient.id,
-        date: datas.attendance.createdAt,
-        data: selectedDocumentTemplate?.data,
-        id: null
-      };
-
-      if (verifyModelExist) {
-        data = { ...data, id: verifyModelExist.id };
-        await documentService.put(`/documents/${verifyModelExist.id}`, data);
-        // dispatch(showNotification("Editado com sucesso"));
-        getDocumentsAfterSave();
-      } else {
-        await documentService.post(`/documents`, data);
-        // dispatch(showNotification("Criado com sucesso"));
-        getDocumentsAfterSave();
-      }
-    } catch (error: any) {
-      console.warn(error.response.data.message);
-    }
   }
 
   // const getScheduleInformations = async () => {
@@ -284,37 +230,41 @@ export const Room = ({ doctor }: TProps) => {
 
       <ChatWindow />
 
-      <ModalCustom
-        open={openModalClinicalRecord}
-        onClose={() => setOpenModalClinicalRecord(!openModalClinicalRecord)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ModalBox>
-          <XIcon onClick={() => setOpenModalClinicalRecord(false)} />
-          <ClinicRegisterWrapper datas={datas!} getDocumentsAfterSave={getDocumentsAfterSave} token="aa" />
-        </ModalBox>
-      </ModalCustom>
+      {doctor && (
+        <>
+          <ModalCustom
+            open={openModalClinicalRecord}
+            onClose={() => setOpenModalClinicalRecord(!openModalClinicalRecord)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <ModalBox>
+              <XIcon onClick={() => setOpenModalClinicalRecord(false)} />
+              <ClinicRegisterWrapper datas={datas!} getDocumentsAfterSave={getDocumentsAfterSave} token="aa" />
+            </ModalBox>
+          </ModalCustom>
 
-      <ModalCustom
-        open={openModalRecipe}
-        onClose={() => setOpenModalRecipe(!openModalRecipe)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ModalBox>
-          <XIcon onClick={() => setOpenModalRecipe(false)} />
-          <FormTypeButtons getModelsByType={getModelsByType} setTypeDocumentSelected={setTypeDocumentSelected} />
+          <ModalCustom
+            open={openModalRecipe}
+            onClose={() => setOpenModalRecipe(!openModalRecipe)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <ModalBox>
+              <XIcon onClick={() => setOpenModalRecipe(false)} />
+              <FormTypeButtons getModelsByType={getModelsByType} setTypeDocumentSelected={setTypeDocumentSelected} />
 
-          <DocViewer
-            templatesOptions={templatesOptions}
-            selectedDocumentTemplate={selectedDocumentTemplate}
-            setSelectedDocumentTemplate={setSelectedDocumentTemplate}
-            changeEditorState={changeEditorState}
-            handleSave={handleSave}
-          />
-        </ModalBox>
-      </ModalCustom>
+              <DocViewer
+                templatesOptions={templatesOptions}
+                selectedDocumentTemplate={selectedDocumentTemplate}
+                setSelectedDocumentTemplate={setSelectedDocumentTemplate}
+                changeEditorState={changeEditorState}
+                handleSave={handleSave}
+              />
+            </ModalBox>
+          </ModalCustom>
+        </>
+      )}
     </Container>
   )
 }

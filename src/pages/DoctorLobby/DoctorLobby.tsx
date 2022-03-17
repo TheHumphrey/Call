@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import {
   Container,
   ContainerSettings,
   WebCam,
-  UsernameInput,
   ContainerInput,
   ButtonJoin,
-  Label,
   DropdownContainer,
   BsBagCheckFillCustom,
   LabelCheck,
@@ -18,28 +16,19 @@ import { useParams } from 'react-router-dom'
 import { LocalVideoPreview, ToggleAudioButton, ToggleVideoButton } from 'components'
 
 import { AudioInputList, PatientInfo } from "components"
-import { useChatContext, useVideoContext } from "hooks"
+import { useChatContext, useDoctorContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
-import { TAttendance, TPatient } from "types"
-import { attendanceApi, clinicApi } from "utils/axios"
-
 export const DoctorLobby = () => {
-  const [paciente, setPaciente] = useState<TPatient>({} as TPatient)
-  const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
+  const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
   const { getToken, isFetching } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const { URLRoomName, token, patientId } = useParams()
+  const { patient } = useDoctorContext()
+  const { URLRoomName } = useParams()
 
   useEffect(() => {
-    getPatient()
-    getAttendance()
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('patient', JSON.stringify(paciente))
-    token && localStorage.setItem('token', token)
-  }, [paciente, token])
+    localStorage.setItem('URLRoomName', JSON.stringify(URLRoomName))
+  }, [URLRoomName])
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -48,39 +37,9 @@ export const DoctorLobby = () => {
     })
   }, [getAudioAndVideoTracks])
 
-  const getPatient = async () => {
-    if (!token || !patientId) return
-
-    const clinicService = clinicApi(token)
-    await clinicService
-      .get<TPatient[]>(`/patients`).then(
-        ({ data }) => {
-          const patient = data.find(item => item.id === patientId)
-          localStorage.setItem('patient', JSON.stringify(patient || ''))
-          if (!patient) return
-          setPaciente(patient)
-        }
-      )
-  }
-
-  const getAttendance = async () => {
-    if (!token || !patientId) return
-    const dateTime = new Date()
-    const today = `${dateTime.getFullYear()}-${(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
-
-    const attendanceService = attendanceApi(token)
-    await attendanceService
-      .get<TAttendance[]>(`/attendances?readyAt=true&createdAt=${today}`).then(
-        ({ data }) => {
-          const attendance = data.find(item => item.patientId === patientId)
-          localStorage.setItem('attendance', JSON.stringify(attendance || ''))
-        }
-      )
-  }
-
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(paciente?.doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
+    getToken(patient?.doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
       videoConnect(access_token)
       chatConnect(access_token)
     })
@@ -88,10 +47,10 @@ export const DoctorLobby = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} title=" " />
+      <PatientInfo patientInfos={patient} title=" " />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={paciente?.doctorName || ' '} />
+          <LocalVideoPreview identity={patient?.doctorName || ' '} />
         </WebCam>
         <ContainerInput>
           <LabelCheck>

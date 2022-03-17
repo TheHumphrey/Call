@@ -50,7 +50,7 @@ export const PatientInfo = (props: TProps) => {
 
       <Text>
         Idade:{' '}
-        <SubText>{getCurrentAge(birthdate) || ''} anos</SubText>
+        <SubText>{birthdate ? `${getCurrentAge(birthdate)} anos` : ''}</SubText>
       </Text>
 
       {/* <Text>
