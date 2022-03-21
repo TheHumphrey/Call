@@ -14,6 +14,7 @@ type TProps = {
   title?: string;
   modalStyle?: boolean;
   isDoctorName?: boolean;
+  healthPlans?: string; // TODO temporario
 }
 
 export const PatientInfo = (props: TProps) => {
@@ -22,13 +23,13 @@ export const PatientInfo = (props: TProps) => {
     title,
     modalStyle,
     isDoctorName,
+    healthPlans,
     doctorName
   } = props
 
   const {
     fullname,
     birthdate,
-    // healthPlans,
     reason,
   } = patientInfos
 
@@ -54,10 +55,12 @@ export const PatientInfo = (props: TProps) => {
         <SubText>{birthdate ? `${getCurrentAge(birthdate)} anos` : ''}</SubText>
       </Text>
 
-      {/* <Text>
-        Plano convênio:{' '}
-        <SubText>{healthPlans}</SubText>
-      </Text> */}
+      {healthPlans && (
+        <Text>
+          Plano convênio:{' '}
+          <SubText>{healthPlans}</SubText>
+        </Text>
+      )}
 
       {
         reason && (

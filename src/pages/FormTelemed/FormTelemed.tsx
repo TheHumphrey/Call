@@ -88,7 +88,7 @@ export const FormTelemd = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} title=" " />
+      <PatientInfo patientInfos={paciente} title=" " healthPlans="Bradesco" />
       <ContainerSettings>
         <WebCam >
           <LocalVideoPreview identity={paciente.fullname || 'nome não encontrado.'} />
