@@ -65,9 +65,9 @@ export const FormTelemd = () => {
     setPaciente(
       {
         ...paciente,
-        fullname: 'Maria Luisa Machado dos santos',
-        birthdate: '15/02/1998',
-        doctorName: 'Dr. Matheus'
+        fullname: 'Luan Fernando de Souza',
+        birthdate: '08/02/1992',
+        doctorName: 'Giorno Giovanna'
       }
     ) // TODO add request later
   }
@@ -91,7 +91,7 @@ export const FormTelemd = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} title=" " healthPlans="Bradesco" />
+      <PatientInfo patientInfos={paciente} title=" " healthPlans="Bradesco" isDoctorName doctorName={paciente?.doctorName} />
       <ContainerSettings>
         <WebCam >
           <LocalVideoPreview identity={paciente.fullname || 'nome não encontrado.'} />

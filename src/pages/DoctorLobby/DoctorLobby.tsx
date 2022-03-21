@@ -36,7 +36,7 @@ export const DoctorLobby = () => {
   const { patient, doctor } = useDoctorContext()
   const { URLRoomName } = useParams()
 
-  const doctorName = `Dr. ${doctor?.user?.name}`
+  const doctorName = doctor?.user?.name
 
   useEffect(() => {
     localStorage.setItem('URLRoomName', JSON.stringify(URLRoomName))
@@ -62,7 +62,7 @@ export const DoctorLobby = () => {
       <PatientInfo patientInfos={patient} title=" " doctorName="doctorName" />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={doctorName || ' '} />
+          <LocalVideoPreview identity={doctorName ? `Dr. ${doctorName}` : ' '} />
         </WebCam>
         <ContainerInput>
           <LabelCheck>
