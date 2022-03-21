@@ -66,7 +66,7 @@ export const FormTelemd = () => {
         birthdate: '15/02/1998',
         doctorName: 'Dr. Matheus'
       }
-    )
+    ) // TODO add request later
   }
 
   const handleJoin = () => {

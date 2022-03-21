@@ -48,8 +48,7 @@ import {
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
 import { useChatContext, useVideoContext, useParticipants, useDoctorContext } from "hooks"
-import { TDataProntuario, TPatient } from "types"
-import { documentApi, documentApiWrapper } from "lib/api/document"
+import { TPatient } from "types"
 
 type TProps = {
   doctor?: boolean;
@@ -126,39 +125,6 @@ export const Room = ({ doctor }: TProps) => {
     setScreen(!screen)
   }
 
-  // const getScheduleInformations = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const attendance = await attendanceApi.get(`/attendances/${attendanceId}`);
-  //     const patient = await clinicApi.get(`/patients/${attendance.data.patientId}`);
-  //     const professional = await clinicApi.get(`/professionals/${user.user.professionalId}`); //TODO: VERIFY THIS OBJECT USER
-  //     const documents = await documentApi.get(`/documents?patient=${attendance.data.patientId}`);
-  //     const procedures = [];
-
-  //     for (const procedure of attendance.data.procedures) {
-  //       const procedureData = await clinicApi.get(`/procedures/${procedure.procedureId}`);
-  //       procedures.push(procedureData.data);
-  //     }
-  //     debugger
-
-  //     setDatas({
-  //       patient: patient.data,
-  //       professional: professional.data,
-  //       documents: documents.data.reverse(),
-  //       attendance: attendance.data,
-  //       procedures
-  //     });
-  //     setLoading(false);
-  //   } catch (error: any) {
-  //     // setError(error.response.data.message);
-  //   }
-  // }
-
-  // return isAwaitDoctor ? (
-  //   <>
-  //     <h1>Esperando Doctor</h1>
-  //   </>
-  // ) : (
   return (
     <Container>
       <PrimaryCam>

@@ -98,7 +98,6 @@ export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave }: TProps) 
         setToggleModal={setToggleModal}
         clinicTypes={clinicTypes}
         onChangeDocument={onChangeDocument}
-      // onClickSave={onClickSave} //TODO: CHECK THIS
       />
 
       <ButtonContainer>

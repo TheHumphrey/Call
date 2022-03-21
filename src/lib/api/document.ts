@@ -5,8 +5,6 @@ const DOCUMENT_API = process.env.REACT_APP_DOCUMENT_API as string
 
 export const documentApi = (token: string) => initAxios(DOCUMENT_API, token)
 
-//TODO: DELETE THIS BELOW AFTER
-
 async function getDocumentTemplateByType(type: any, documentApi: AxiosInstance) {
   const response = await documentApi.get(`/documentTemplates?type=${type}`);
   return response.data;
