@@ -9,7 +9,6 @@ import {
   RegisterContainerWrapper,
   NewRegisterArea,
   Text,
-  ButtonMoreRegister,
   ReferContainer,
   NewRegisterText,
   ClinicTypesContainer,

@@ -1,6 +1,5 @@
-import React from 'react'
 import { LocalAudioTrack } from 'twilio-video'
-import { FormControl, MenuItem, Typography, Select, Grid } from '@material-ui/core'
+import { FormControl, MenuItem, Typography, Select } from '@material-ui/core'
 import { SELECTED_AUDIO_INPUT_KEY } from 'utils/constants'
 import { useDevices, useMediaStreamTrack, useVideoContext } from 'hooks'
 import styled from 'styled-components'

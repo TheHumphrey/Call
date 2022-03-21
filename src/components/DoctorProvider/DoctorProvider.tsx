@@ -58,8 +58,8 @@ export const DoctorProvider: React.FC = ({ children }) => {
   const getAttendance = async () => {
     if (!token || !patientId) return
 
-    const dateTime = new Date()
-    const today = `${dateTime.getFullYear()}-${(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
+    // const dateTime = new Date()
+    // const today = `${dateTime.getFullYear()}-${(dateTime.getMonth() + 1)}-${dateTime.getDate()}`
 
     const attendanceService = attendanceApi(token)
     // await attendanceService.get<TAttendance[]>(`/attendances?readyAt=true&createdAt=${today}`)

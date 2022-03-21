@@ -16,7 +16,6 @@ import {
   GridCustom,
   TextAreaContainer,
 } from './style'
-import { theme } from 'styles/theme'
 
 interface ChatInputProps {
   channel: Channel;

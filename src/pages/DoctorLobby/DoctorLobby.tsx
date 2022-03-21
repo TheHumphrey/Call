@@ -12,16 +12,26 @@ import {
 } from '../FormTelemed/style'
 
 import { useParams } from 'react-router-dom'
-
-import { LocalVideoPreview, ToggleAudioButton, ToggleVideoButton } from 'components'
-
-import { AudioInputList, PatientInfo } from "components"
-import { useChatContext, useDoctorContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
+
+import {
+  LocalVideoPreview,
+  ToggleAudioButton,
+  ToggleVideoButton,
+  AudioInputList,
+  PatientInfo,
+} from 'components'
+
+import {
+  useChatContext,
+  useDoctorContext,
+  useVideoContext
+} from "hooks"
 
 export const DoctorLobby = () => {
   const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
-  const { getToken, isFetching } = useAppState()
+  // const { getToken, isFetching } = useAppState()
+  const { getToken } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const { patient, doctor } = useDoctorContext()
   const { URLRoomName } = useParams()

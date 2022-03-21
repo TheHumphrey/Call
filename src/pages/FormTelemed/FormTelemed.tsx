@@ -37,14 +37,17 @@ const initialPacient = {
 
 export const FormTelemd = () => {
   const [paciente, setPaciente] = useState<TPatient>(initialPacient as TPatient)
-  const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
-  const { getToken, isFetching } = useAppState()
+  // const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
+  const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
+  // const { getToken, isFetching } = useAppState()
+  const { getToken } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
   const { URLRoomName } = useParams()
 
   useEffect(() => {
     getPatient()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
