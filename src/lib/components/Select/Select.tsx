@@ -1,8 +1,8 @@
-import React from "react";
-import { StyledSelect } from "./style";
-import makeAnimated from "react-select/animated";
+import React from "react"
+import { StyledSelect } from "./style"
+import makeAnimated from "react-select/animated"
 
-const animatedComponents = makeAnimated();
+const animatedComponents = makeAnimated()
 
 interface Props {
   value?: any,
@@ -16,7 +16,6 @@ interface Props {
   className?: any
 }
 
-const ref = React.createRef();
 export const Select = React.forwardRef(({
   value,
   disabled,
@@ -41,5 +40,5 @@ export const Select = React.forwardRef(({
       hasRequiredError={hasRequiredError}
       {...props}
     />
-  );
-});
+  )
+})

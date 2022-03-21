@@ -1,4 +1,4 @@
-import { formatDate } from "utils/helpers";
+import { formatDate } from "utils/helpers"
 import {
   Container,
   TypeNameContainer,
@@ -13,7 +13,7 @@ import {
   NewRegisterText,
   ClinicTypesContainer,
   RegisterWrapper,
-} from "./style";
+} from "./style"
 
 interface Props {
   setToggleModal: any,
@@ -21,9 +21,9 @@ interface Props {
   onChangeDocument: any,
 }
 
-export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Props) => {
+export const ClinicType = ({ clinicTypes, onChangeDocument }: Props) => {
   function renderRegister(datas: any, name: any, index?: any) {
-    const lastDocument = datas[datas.length - 1];
+    const lastDocument = datas[datas.length - 1]
 
     if (lastDocument) {
       return (
@@ -31,14 +31,14 @@ export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Pr
           <Date>{formatDate(lastDocument?.createdAt)}</Date>
           <Register>{lastDocument?.data}</Register>
         </RegisterContainer>
-      );
+      )
     }
 
     return (
       <RegisterContainer withoutRegister index={index}>
         <Register>{`Não existe registro de ${name} para o último atendimento`}</Register>
       </RegisterContainer>
-    );
+    )
   }
   return (
     <Container>
@@ -65,8 +65,8 @@ export const ClinicType = ({ setToggleModal, clinicTypes, onChangeDocument }: Pr
               </RegisterWrapper>
             </RegisterContainerWrapper>
           </ClinicTypesContainer>
-        );
+        )
       })}
     </Container>
-  );
+  )
 }

@@ -70,9 +70,6 @@ export const VideoProvider = ({ options, children, onError = () => { } }: VideoP
   useRestartAudioTrackOnDeviceChange(localTracks)
 
   const [isBackgroundSelectionOpen, setIsBackgroundSelectionOpen] = useState(false)
-  const videoTrack = localTracks.find(track => !track.name.includes('screen') && track.kind === 'video') as
-    | LocalVideoTrack
-    | undefined
 
   return (
     <VideoContext.Provider

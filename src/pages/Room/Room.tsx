@@ -20,7 +20,7 @@ import {
   VideoButton,
   // CamParticipant,
   FileIcon,
-  ClipIcon,
+  // ClipIcon,
   BottleIcon,
   FullButtonIcon,
   ModalCustom,
@@ -62,19 +62,16 @@ export const Room = ({ doctor }: TProps) => {
   const [currentTime, setCurrentTime] = useState(0)
   const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
 
-  const [selectedType, setSelectedType] = useState({ value: [] });
+  // const [selectedType, setSelectedType] = useState({ value: [] });
 
   const {
     patient,
     setPatient,
     datas,
-    setDatas,
     changeEditorState,
     selectedDocumentTemplate,
     setSelectedDocumentTemplate,
     templatesOptions,
-    setTemplatesOptions,
-    typeDocumentSelected,
     setTypeDocumentSelected,
     getDocumentsAfterSave,
     getModelsByType,

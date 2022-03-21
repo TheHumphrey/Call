@@ -5,7 +5,7 @@ import { NetworkQualityLevel } from 'components'
 
 import Tooltip from '@material-ui/core/Tooltip'
 
-import { useIsRecording, useParticipantIsReconnecting, usePublications, useTrack, useVideoContext } from 'hooks'
+import { useIsRecording, useParticipantIsReconnecting, usePublications, useTrack } from 'hooks'
 import AudioLevelIndicator from 'components/AudioLevelIndicator/AudioLevelIndicator'
 
 import {
