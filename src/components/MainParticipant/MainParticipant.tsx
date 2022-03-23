@@ -41,6 +41,7 @@ export const MainParticipant = () => {
     ) as LocalVideoTrack)
 
     setVideoPriority((mainParticipant === selectedParticipant) && mainParticipant !== localParticipant ? 'high' : null)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localTracks])
 
   return (

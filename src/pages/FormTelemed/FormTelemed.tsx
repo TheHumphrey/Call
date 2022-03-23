@@ -25,27 +25,29 @@ import {
 
 import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
-import { TPaciente } from "types"
-import { patientAPI } from "utils/axios"
+import { TPatient } from "types"
+// import { patientAPI } from "utils/axios"
 
-const initalPaciente: TPaciente = {
-  name: 'Maria Luisa Machado dos santos',
-  idade: 54,
-  planoConvenio: 'Bradesco',
-  doctorName: 'Dr. Matheus',
+const initialPacient = {
+  fullname: '',
+  birthdate: '',
+  doctorName: '',
 }
 
 
 export const FormTelemd = () => {
-  const [paciente, setPaciente] = useState<TPaciente>({} as TPaciente)
-  const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
-  const { getToken, isFetching } = useAppState()
+  const [paciente, setPaciente] = useState<TPatient>(initialPacient as TPatient)
+  // const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
+  const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
+  // const { getToken, isFetching } = useAppState()
+  const { getToken } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
   const { URLRoomName } = useParams()
 
   useEffect(() => {
     getPatient()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -60,7 +62,14 @@ export const FormTelemd = () => {
   }, [paciente])
 
   const getPatient = () => {
-    setPaciente(initalPaciente)
+    setPaciente(
+      {
+        ...paciente,
+        fullname: 'Luan Fernando de Souza',
+        birthdate: '08/02/1992',
+        doctorName: 'Giorno Giovanna'
+      }
+    ) // TODO add request later
   }
 
   const handleJoin = () => {
@@ -73,19 +82,19 @@ export const FormTelemd = () => {
   }
 
   const updatePatientInfo = async () => {
-    patientAPI.post<TPaciente>('/patientset', paciente).then()
+    // patientAPI.post<TPaciente>('/patientset', paciente).then()
   }
 
   const onChangeUsername = (value: string) => setUsername(value)
 
-  const onChangeMotivoConsulta = (value: string) => setPaciente({ ...paciente, motivoConsulta: value })
+  const onChangeMotivoConsulta = (value: string) => setPaciente({ ...paciente, reason: value })
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} title=" " />
+      <PatientInfo patientInfos={paciente} title=" " healthPlans="Bradesco" isDoctorName doctorName={paciente?.doctorName} />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={paciente.name} />
+          <LocalVideoPreview identity={paciente.fullname || 'nome não encontrado.'} />
         </WebCam>
         <ContainerInput>
           <Label>

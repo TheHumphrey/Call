@@ -38,3 +38,5 @@ export { ClinicType } from './ClinicRegisterWrapper/components/ClinicType/Clinic
 export { DocViewer } from './DocViewer/DocViewer'
 
 export { PatientInfo } from './PatientInfo/PatientInfo'
+
+export { DoctorContext, DoctorProvider } from './DoctorProvider/DoctorProvider'

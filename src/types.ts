@@ -1,3 +1,4 @@
+import React from 'react';
 import { TwilioError, Track, VideoBandwidthProfileOptions, LocalVideoTrack, RemoteVideoTrack } from 'twilio-video'
 
 declare module 'twilio-video' {
@@ -68,7 +69,7 @@ type TProcedures = {
   updatedAt: string;
 }
 
-type TAttendance = {
+export type TAttendance = {
   canceledAt: any;
   createdAt: string;
   deletedAt: string;
@@ -91,7 +92,7 @@ type TPhones = {
   updatedAt: string;
 }
 
-type TPatient = {
+export type TPatient = {
   addresses: TAdress[]
   allergies: any[]
   birthdate: string;
@@ -115,6 +116,8 @@ type TPatient = {
   socialName: any;
   specialNeeds: any;
   updatedAt: string;
+  doctorName?: string;
+  reason?: string;
 }
 
 interface IProcedures {
@@ -232,20 +235,81 @@ type TProfessional = {
   updatedAt: string;
 }
 
+export type TDocuments = {
+  attendanceId?: any;
+  createdAt?: string;
+  data?: string;
+  date?: string;
+  id?: number | null;
+  patientId?: string;
+  procedureId?: any;
+  professionalId?: string;
+  title?: any;
+  type?: string;
+  updatedAt?: string;
+}
+
 export type TDataProntuario = {
   attendance: TAttendance;
-  documents: any[];
+  documents: TDocuments[];
   patient: TPatient;
   procedures: IProcedures[];
   professional: TProfessional;
 }
 
+export type TDoctor = {
+  exp: number;
+  iat: number;
+  tenant: string;
+  user: {
+    avatarUrl: any;
+    createdAt: string;
+    deletedAt: any;
+    email: string;
+    id: string;
+    name: string;
+    permissions: any[];
+    professionalId: string;
+    rolesIds: string[]
+    token: any;
+    updatedAt: string;
+    username: string;
+  }
+}
+
 export type TDocumentTypes = "clinicalRecord" | "certificate" | "recipe"
 
-export type TPaciente = {
-  name: string;
-  idade: number;
-  planoConvenio: string;
-  motivoConsulta?: string;
-  doctorName?: string;
+export type TDoctorProviderContext = {
+  authToken: string;
+  attendances: TAttendance[];
+  setAttendances: React.Dispatch<React.SetStateAction<TAttendance[]>>;
+  currentAttendance: TAttendance;
+  setCurrentAttendance: React.Dispatch<React.SetStateAction<TAttendance>>;
+  patient: TPatient;
+  setPatient: React.Dispatch<React.SetStateAction<TPatient>>;
+  doctor: TDoctor;
+  setDoctor: React.Dispatch<React.SetStateAction<TDoctor>>;
+  datas: TDataProntuario;
+  setDatas: React.Dispatch<React.SetStateAction<TDataProntuario>>;
+  getPatient(): Promise<void>;
+  getAttendance(): Promise<void>;
+  getDoctorData(): Promise<void>;
+  changeEditorState(state: any): void;
+  selectedDocumentTemplate: any;
+  setSelectedDocumentTemplate: React.Dispatch<React.SetStateAction<any>>;
+  typeDocumentSelected: any;
+  setTypeDocumentSelected: React.Dispatch<React.SetStateAction<any>>;
+  templatesOptions: any[];
+  setTemplatesOptions: React.Dispatch<React.SetStateAction<any[]>>;
+  getDocumentsAfterSave(): Promise<void>;
+  getModelsByType(object?: any): Promise<void>;
+  handleSave(): Promise<void>;
+}
+
+export type TDocumentTemplate = {
+  data: string;
+  id: number;
+  label: string;
+  value: number;
+  type: string;
 }

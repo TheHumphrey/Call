@@ -1,15 +1,14 @@
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/css/froala_style.css";
-import "froala-editor/js/plugins.pkgd.min.js";
+import "froala-editor/css/froala_editor.pkgd.min.css"
+import "froala-editor/css/froala_style.css"
+import "froala-editor/js/plugins.pkgd.min.js"
 
-import { EditorContainer, EditorHeaderContainer, EditorWrapper, SaveButton } from "./style";
-import FroalaEditorComponent from "react-froala-wysiwyg";
-import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
+import { EditorContainer, EditorHeaderContainer, EditorWrapper, SaveButton } from "./style"
+import FroalaEditorComponent from "react-froala-wysiwyg"
+import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView"
 
-import { useEffect, useState } from "react";
-import registerSaveButton from "./buttons/save";
-import registerInputButton from "./buttons/input";
-import defaultButtonsFactory from "./buttonFactories/defaultButtonsFactory";
+import { useEffect, useState } from "react"
+import registerSaveButton from "./buttons/save"
+import defaultButtonsFactory from "./buttonFactories/defaultButtonsFactory"
 interface Props {
   data: string,
   title?: any,
@@ -23,13 +22,17 @@ interface Props {
 
 export const Editor = (props: Props) => {
 
-  const { withoutBorder, data, viewOnly, documentReady, title, saveCallback, saveTopButton, changeState } = props;
+  const { withoutBorder, data, viewOnly, documentReady, title, saveCallback, saveTopButton, changeState } = props
 
-  const [html, setHtml] = useState(props.data);
+  const [html, setHtml] = useState(data)
+
+  useEffect(() => {
+    setHtml(data)
+  }, [data])
 
   function handleChange(event: any) {
-    setHtml(event);
-    changeState(event);
+    setHtml(event)
+    changeState(event)
   }
 
   function handleConfig() {
@@ -61,23 +64,23 @@ export const Editor = (props: Props) => {
       toolbarBottom: true,
       documentReady: documentReady,
       toolbarSticky: false,
-    };
+    }
 
 
     if (!saveTopButton) {
-      config.toolbarButtons.push(["save"]);
+      config.toolbarButtons.push(["save"])
     }
 
-    return config;
+    return config
   }
 
   useEffect(() => {
-    defaultButtonsFactory();
-  }, []);
+    defaultButtonsFactory()
+  }, [])
 
   useEffect(() => {
-    registerSaveButton(saveCallback);
-  });
+    registerSaveButton(saveCallback)
+  })
 
   return (
     <EditorContainer>
@@ -99,5 +102,5 @@ export const Editor = (props: Props) => {
         {viewOnly && <FroalaEditorView model={html} />}
       </EditorWrapper>
     </EditorContainer>
-  );
+  )
 }

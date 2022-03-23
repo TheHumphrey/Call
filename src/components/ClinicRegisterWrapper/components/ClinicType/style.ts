@@ -39,7 +39,7 @@ export const TypeNameContainer = styled.div<TProps>`
   height: ${heightT.medium};
   width: 120px;
   display: flex;
-  margin-top: ${({ index }) => index == 0 ? '30px' : '0px'};
+  margin-top: ${({ index }) => index === 0 ? '30px' : '0px'};
   justify-content: center;
   align-items: center;
 
@@ -82,7 +82,7 @@ export const RegisterContainer = styled.div<TRegisterContainer>`
   overflow-y: scroll;
   white-space: break-spaces;
   
-  margin-top: ${({ index }) => index == 0 ? '30px' : '0px'};
+  margin-top: ${({ index }) => index === 0 ? '30px' : '0px'};
   justify-content: ${({ withoutRegister }) => withoutRegister && "center"};
   align-items: ${({ withoutRegister }) => withoutRegister && "center"};
   text-align: ${({ withoutRegister }) => withoutRegister && "center"};
@@ -125,7 +125,7 @@ export const NewRegisterArea = styled.textarea<TProps>`
   font-size: 1rem;
   padding: 8px 16px;
   min-width: 470px;
-  margin-top: ${({ index }) => index == 0 ? '30px' : '0px'};
+  margin-top: ${({ index }) => index === 0 ? '30px' : '0px'};
 
   @media only screen and (max-width: 1380px) {
     height: ${heightT.small};

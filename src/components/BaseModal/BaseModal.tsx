@@ -38,6 +38,7 @@ const BaseModal = ({
 
       if (containerRef.current) containerRef.current.addEventListener("click", handleClose);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleModal]);
 
   function handleClose(event: any) {

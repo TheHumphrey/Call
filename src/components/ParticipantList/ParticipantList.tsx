@@ -16,7 +16,7 @@ export const ParticipantList = (props: TProps) => {
   const { room } = useVideoContext()
   const localParticipant = room!.localParticipant
   const participants = useParticipants()
-  const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant()
+  const [selectedParticipant] = useSelectedParticipant()
   const [isRender, setIsRender] = useState(false)
 
   useEffect(

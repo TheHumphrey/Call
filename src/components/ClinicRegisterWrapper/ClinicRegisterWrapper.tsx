@@ -9,7 +9,7 @@ import {
   Container,
   ButtonContainer
 } from "./style"
-import { useDocuments } from "hooks"
+import { useDoctorContext, useDocuments } from "hooks"
 
 const clinicRegisterTypes = [
   { name: "ANAMNESE", value: "subjective" },
@@ -22,14 +22,14 @@ const clinicRegisterTypes = [
 type TProps = {
   datas: TDataProntuario;
   getDocumentsAfterSave: any;
-  token: string;
 }
 
-export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave, token }: TProps) => {
+export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave }: TProps) => {
   const [toggleModal, setToggleModal] = useState(false)
   const [clinicTypes, setClinicTypes] = useState<any[]>([])
   const [newDocuments, setNewDocuments] = useState<any[]>([])
-  const documentService = documentApi(token)
+  const { authToken } = useDoctorContext()
+  const documentService = documentApi(authToken)
   const { setStatusToProgress } = useDocuments()
 
   useEffect(() => {
@@ -98,7 +98,6 @@ export const ClinicRegisterWrapper = ({ datas, getDocumentsAfterSave, token }: T
         setToggleModal={setToggleModal}
         clinicTypes={clinicTypes}
         onChangeDocument={onChangeDocument}
-      // onClickSave={onClickSave} //TODO: CHECK THIS
       />
 
       <ButtonContainer>

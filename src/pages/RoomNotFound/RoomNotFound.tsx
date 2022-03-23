@@ -54,16 +54,20 @@ export const ContainerRoom = styled.div`
   height: 100vh;
 `
 
-export const RoomNotFound = () => {
+type TProps = {
+  isCallEnd?: boolean;
+}
+
+export const RoomNotFound = ({ isCallEnd }: TProps) => {
 
   return (
     <Container>
       <ContainerTitle>
-        <Title>TELEMED</Title>
+        <Title>{" "}</Title>
       </ContainerTitle>
 
       <ContainerRoom>
-        <TitleRoom>Sala não encontrada!</TitleRoom>
+        <TitleRoom>{isCallEnd ? "Chamada finalizada!" : "Sala não encontrada!"}</TitleRoom>
       </ContainerRoom>
 
     </Container>

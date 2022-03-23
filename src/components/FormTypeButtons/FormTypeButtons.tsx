@@ -19,6 +19,7 @@ export const FormTypeButtons = ({ getModelsByType, setTypeDocumentSelected }: Pr
 
   useEffect(() => {
     getModelsByType({ value: "prescription" })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

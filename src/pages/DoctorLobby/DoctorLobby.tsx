@@ -1,52 +1,46 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import {
   Container,
   ContainerSettings,
   WebCam,
-  UsernameInput,
   ContainerInput,
   ButtonJoin,
-  Label,
   DropdownContainer,
   BsBagCheckFillCustom,
   LabelCheck,
 } from '../FormTelemed/style'
 
 import { useParams } from 'react-router-dom'
-
-import { LocalVideoPreview, ToggleAudioButton, ToggleVideoButton } from 'components'
-
-import { AudioInputList, PatientInfo } from "components"
-import { useChatContext, useVideoContext } from "hooks"
 import { useAppState } from "state"
 
-import { TPaciente } from "types"
-// import { patientAPI } from "utils/axios"
+import {
+  LocalVideoPreview,
+  ToggleAudioButton,
+  ToggleVideoButton,
+  AudioInputList,
+  PatientInfo,
+} from 'components'
 
-const initalPaciente: TPaciente = {
-  name: 'Maria Luisa Machado dos santos',
-  idade: 54,
-  planoConvenio: 'Bradesco',
-  motivoConsulta: 'Dor de cabeça, dor de barriga, dores nos braços',
-  doctorName: 'Dr. Matheus',
-}
+import {
+  useChatContext,
+  useDoctorContext,
+  useVideoContext
+} from "hooks"
 
 export const DoctorLobby = () => {
-  const [paciente, setPaciente] = useState<TPaciente>({} as TPaciente)
-  const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
-  const { getToken, isFetching } = useAppState()
+  const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
+  // const { getToken, isFetching } = useAppState()
+  const { getToken } = useAppState()
   const { connect: chatConnect } = useChatContext()
-  const { URLRoomName, token } = useParams()
+  const { patient, doctor } = useDoctorContext()
+  const { URLRoomName } = useParams()
+
+  const doctorName = doctor?.user?.name
 
   useEffect(() => {
-    getPatient()
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('patient', JSON.stringify(paciente))
-    token && localStorage.setItem('token', token)
-  }, [paciente, token])
+    localStorage.setItem('URLRoomName', JSON.stringify(URLRoomName))
+  }, [URLRoomName])
 
   useEffect(() => {
     getAudioAndVideoTracks().catch(error => {
@@ -55,14 +49,9 @@ export const DoctorLobby = () => {
     })
   }, [getAudioAndVideoTracks])
 
-  const getPatient = () => {
-    setPaciente(initalPaciente)
-    // patientAPI.post<TPaciente>('/patientset', paciente).then(({ data }) => localStorage.setItem('patient', JSON.stringify(data)))
-  }
-
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(paciente?.doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
+    getToken(doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
       videoConnect(access_token)
       chatConnect(access_token)
     })
@@ -70,10 +59,10 @@ export const DoctorLobby = () => {
 
   return (
     <Container>
-      <PatientInfo patientInfos={paciente} title=" " />
+      <PatientInfo patientInfos={patient} title=" " doctorName="doctorName" />
       <ContainerSettings>
         <WebCam >
-          <LocalVideoPreview identity={paciente?.doctorName || ' '} />
+          <LocalVideoPreview identity={doctorName ? `Dr. ${doctorName}` : ' '} />
         </WebCam>
         <ContainerInput>
           <LabelCheck>

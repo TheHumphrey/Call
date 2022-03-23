@@ -42,6 +42,7 @@ const AudioLevelIndicator = (props: TProps) => {
     fill ? setColor(disabled ? theme.colors.grayLight : isTrackEnabled ? fill : theme.colors.secondary) :
       setColor(disabled ? theme.colors.grayLight : isTrackEnabled ? theme.colors.primary : theme.colors.secondary)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTrackEnabled, disabled])
 
   useEffect(() => {
