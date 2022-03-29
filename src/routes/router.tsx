@@ -5,7 +5,8 @@ import {
   DoctorLobby,
   FormTelemd,
   Room,
-  RoomNotFound
+  RoomNotFound,
+  DoctorRoom
 } from 'pages'
 
 import { useRoomState } from 'hooks'
@@ -35,7 +36,7 @@ const AppDoctor = ({ roomState }: any) => (
       <DoctorLobby />
     ) : (
       <Main>
-        <Room doctor />
+        <DoctorRoom />
       </Main>
     )}
   </DoctorProvider>

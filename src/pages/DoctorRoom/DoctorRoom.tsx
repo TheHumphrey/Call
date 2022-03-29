@@ -10,15 +10,18 @@ import {
   ResolutionMenu,
   BottomMenu,
   SecondaryCam,
-  // BottomButton,
+  SideMenu,
   CallButton,
   CallButtonIcon,
-  // SecundaryMenu,
-  // ConectionMenu,
   AudioButton,
   VideoButton,
-  // CamParticipant,
+  FileIcon,
+  BottleIcon,
   FullButtonIcon,
+  ModalCustom,
+  ModalBox,
+  XIcon,
+  PacientInfoContainer,
 } from './style'
 
 import {
@@ -31,21 +34,49 @@ import {
 import {
   ChatWindow,
   ParticipantList,
+  ClinicRegisterWrapper,
+  FormTypeButtons,
+  DocViewer,
+  PatientInfo,
 } from 'components'
 
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
-import { useChatContext, useVideoContext, useParticipants } from "hooks"
+import { useChatContext, useVideoContext, useParticipants, useDoctorContext } from "hooks"
+import { TPatient } from "types"
 
-export const Room = () => {
+export const DoctorRoom = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
+  const [openModalClinicalRecord, setOpenModalClinicalRecord] = useState(false)
+  const [openModalRecipe, setOpenModalRecipe] = useState(false)
   const [screen, setScreen] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
 
   // const [selectedType, setSelectedType] = useState({ value: [] });
 
+  const {
+    patient,
+    setPatient,
+    datas,
+    changeEditorState,
+    selectedDocumentTemplate,
+    setSelectedDocumentTemplate,
+    templatesOptions,
+    setTypeDocumentSelected,
+    getDocumentsAfterSave,
+    getModelsByType,
+    handleSave,
+  } = useDoctorContext()
+
   const participants = useParticipants()
+
+
+  useEffect(() => {
+    const newPatient: TPatient | null = JSON.parse(localStorage.getItem('patient') || '')
+
+    newPatient && setPatient({ ...patient, ...newPatient })
+  }, [])
 
   useEffect(() => {
     if (!isAwaitDoctor) {
@@ -114,6 +145,19 @@ export const Room = () => {
         </CallButton>
 
       </BottomMenu>
+      <SideMenu isChatWindowOpen={isChatWindowOpen}>
+        <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
+          <FileIcon />
+        </CallButton>
+
+        <CallButton>
+          <BottleIcon onClick={() => setOpenModalRecipe(true)} />
+        </CallButton>
+      </SideMenu>
+
+      <PacientInfoContainer >
+        <PatientInfo patientInfos={patient} modalStyle />
+      </PacientInfoContainer>
 
       <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
         <ParticipantList />
@@ -121,6 +165,38 @@ export const Room = () => {
       </SecondaryCam>
 
       <ChatWindow />
+
+      <ModalCustom
+        open={openModalClinicalRecord}
+        onClose={() => setOpenModalClinicalRecord(!openModalClinicalRecord)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <ModalBox>
+          <XIcon onClick={() => setOpenModalClinicalRecord(false)} />
+          <ClinicRegisterWrapper datas={datas} getDocumentsAfterSave={getDocumentsAfterSave} />
+        </ModalBox>
+      </ModalCustom>
+
+      <ModalCustom
+        open={openModalRecipe}
+        onClose={() => setOpenModalRecipe(!openModalRecipe)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <ModalBox>
+          <XIcon onClick={() => setOpenModalRecipe(false)} />
+          <FormTypeButtons getModelsByType={getModelsByType} setTypeDocumentSelected={setTypeDocumentSelected} />
+
+          <DocViewer
+            templatesOptions={templatesOptions}
+            selectedDocumentTemplate={selectedDocumentTemplate}
+            setSelectedDocumentTemplate={setSelectedDocumentTemplate}
+            changeEditorState={changeEditorState}
+            handleSave={handleSave}
+          />
+        </ModalBox>
+      </ModalCustom>
     </Container>
   )
 }
