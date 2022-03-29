@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Participant, useSelectedParticipant } from 'components'
 import { useParticipants, useVideoContext } from 'hooks'
+import { Participant as IParticipant } from 'twilio-video'
 
 import {
   Container,
@@ -10,6 +11,23 @@ import {
 type TProps = {
   isPrimaryCam?: boolean;
 }
+
+type TJustOneProps = {
+  localParticipant: IParticipant;
+  isPrimaryCam: boolean | undefined;
+}
+
+const JustOneParticipant = ({ localParticipant, isPrimaryCam }: TJustOneProps) => (
+  <>
+    {isPrimaryCam ? (
+      <ContainerFull>
+        <Participant
+          participant={localParticipant}
+          isPrimaryCam={isPrimaryCam}
+        />
+      </ContainerFull>) : null}
+  </>
+)
 
 export const ParticipantList = (props: TProps) => {
   const { isPrimaryCam } = props
@@ -25,7 +43,12 @@ export const ParticipantList = (props: TProps) => {
     }, [participants]
   )
 
-  return isRender ? null : isPrimaryCam ? (
+  return isRender ? (
+    <JustOneParticipant
+      localParticipant={localParticipant}
+      isPrimaryCam={isPrimaryCam}
+    />
+  ) : isPrimaryCam ? (
     <ContainerFull>
       {participants.map(participant => {
         return (
