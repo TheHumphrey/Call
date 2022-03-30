@@ -21,7 +21,7 @@ import {
   ModalCustom,
   ModalBox,
   XIcon,
-  PacientInfoContainer,
+  CamContainer,
 } from './style'
 
 import {
@@ -115,56 +115,55 @@ export const DoctorRoom = () => {
 
   return (
     <Container>
-      <PrimaryCam>
-        <ParticipantList isPrimaryCam />
-      </PrimaryCam>
-      <TopMenu >
-        <LabelMenu>Consulta Telemedicina</LabelMenu>
-        <TimerMenu>
-          {`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
-        </TimerMenu>
-        <ResolutionMenu>HD</ResolutionMenu>
-      </TopMenu>
+      <PatientInfo patientInfos={patient} modalStyle title=" " />
+      <CamContainer>
+        <PrimaryCam>
+          <ParticipantList isPrimaryCam doctorStyle />
+        </PrimaryCam>
+        <TopMenu >
+          <LabelMenu>Consulta Telemedicina</LabelMenu>
+          <TimerMenu>
+            {`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
+          </TimerMenu>
+          <ResolutionMenu>HD</ResolutionMenu>
+        </TopMenu>
 
-      <BottomMenu>
-        <AudioButton fill="white" />
-        <VideoButton fill="white" />
+        <BottomMenu>
+          <AudioButton fill="white" />
+          <VideoButton fill="white" />
 
-        <ToggleChatButton />
+          <ToggleChatButton />
 
-        <CallButton onClick={handleDisconnect}>
-          <CallButtonIcon>
-            <BsTelephoneXFill />
-          </CallButtonIcon>
-        </CallButton>
+          <CallButton onClick={handleDisconnect}>
+            <CallButtonIcon>
+              <BsTelephoneXFill />
+            </CallButtonIcon>
+          </CallButton>
 
-        <CallButton onClick={handleFullscreen}>
-          <FullButtonIcon>
-            {screen ? (<BsFullscreenExit />) : (<BsArrowsFullscreen />)}
-          </FullButtonIcon>
-        </CallButton>
+          <CallButton onClick={handleFullscreen}>
+            <FullButtonIcon>
+              {screen ? (<BsFullscreenExit />) : (<BsArrowsFullscreen />)}
+            </FullButtonIcon>
+          </CallButton>
 
-      </BottomMenu>
-      <SideMenu isChatWindowOpen={isChatWindowOpen}>
-        <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
-          <FileIcon />
-        </CallButton>
+        </BottomMenu>
+        <SideMenu isChatWindowOpen={isChatWindowOpen}>
+          <CallButton onClick={() => setOpenModalClinicalRecord(true)}>
+            <FileIcon />
+          </CallButton>
 
-        <CallButton>
-          <BottleIcon onClick={() => setOpenModalRecipe(true)} />
-        </CallButton>
-      </SideMenu>
+          <CallButton>
+            <BottleIcon onClick={() => setOpenModalRecipe(true)} />
+          </CallButton>
+        </SideMenu>
 
-      <PacientInfoContainer >
-        <PatientInfo patientInfos={patient} modalStyle />
-      </PacientInfoContainer>
+        <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
+          <ParticipantList />
 
-      <SecondaryCam isChatWindowOpen={isChatWindowOpen}>
-        <ParticipantList />
+        </SecondaryCam>
+      </CamContainer>
 
-      </SecondaryCam>
-
-      <ChatWindow />
+      <ChatWindow doctorStyle />
 
       <ModalCustom
         open={openModalClinicalRecord}
@@ -197,6 +196,7 @@ export const DoctorRoom = () => {
           />
         </ModalBox>
       </ModalCustom>
+
     </Container>
   )
 }

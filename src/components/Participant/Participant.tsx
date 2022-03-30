@@ -10,6 +10,7 @@ interface ParticipantProps {
   isPrimaryCam?: boolean;
   isLocalParticipant?: boolean;
   hideParticipant?: boolean;
+  doctorStyle?: boolean;
 }
 
 export const Participant = ({
@@ -20,6 +21,7 @@ export const Participant = ({
   isLocalParticipant,
   isPrimaryCam,
   hideParticipant,
+  doctorStyle,
 }: ParticipantProps) => {
   return (
     <ParticipantInfo
@@ -29,6 +31,7 @@ export const Participant = ({
       isPrimaryCam={isPrimaryCam}
       isLocalParticipant={isLocalParticipant}
       hideParticipant={hideParticipant}
+      doctorStyle={doctorStyle}
     >
       <ParticipantTracks
         participant={participant}

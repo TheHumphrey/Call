@@ -70,16 +70,20 @@ export const ModalBox = styled(Box)`
 `
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 50vw;
+  height: 50vh;
+`
+
+export const CamContainer = styled.div`
+  width: 80vw;
   height: 100vh;
 `
 
 export const PrimaryCam = styled.div`
   display: flex;
 
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
+  width: 100%;
+  height: 100%;
 `
 
 export const CamParticipant = styled(MainParticipant)`
@@ -92,11 +96,19 @@ export const TopMenu = styled.div`
   height: 24px;
   position: absolute;
   left: 45%;
-  top: 4%;
+  top: 26%;
 
   z-index: 10;
 
   flex-direction: row;
+
+  @media only screen and (max-width: 1380px) {
+    left: 42%;
+  }
+
+  @media only screen and (max-width: 1280px) {
+    left: 40%;
+  }
 `
 
 export const LabelMenu = styled.div`
@@ -160,8 +172,8 @@ export const BottomMenu = styled.div`
   height: 56px;
   position: absolute;
 
-  left: 45%;
-  bottom: 5%;
+  left: 43%;
+  bottom: 6%;
   z-index: 10;
 
   background-color: ${({ theme }) => theme.colors.grayDark};
@@ -176,8 +188,8 @@ export const SideMenu = styled.div<TSecundaryCam>`
   height: 112px;
   position: absolute;
 
-  right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '22%' : '2%'};
-  bottom: 42%;
+  right: 21%;
+  bottom: 34%;
   z-index: 10;
 
   background-color: ${({ theme }) => theme.colors.grayDark};
@@ -201,8 +213,8 @@ export const SecondaryCam = styled.div<TSecundaryCam>`
   height: 158px;
   position: absolute;
 
-  top: 4%;
-  right: ${({ isChatWindowOpen }) => isChatWindowOpen ? '20%' : '2%'};
+  top: 26%;
+  right: 19%;
 
   border-radius: 2px;
 `

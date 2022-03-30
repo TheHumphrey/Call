@@ -29,6 +29,7 @@ interface ParticipantInfoProps {
   isPrimaryCam?: boolean;
   isLocalParticipant?: boolean;
   hideParticipant?: boolean;
+  doctorStyle?: boolean;
 }
 
 export const ParticipantInfo = ({
@@ -39,6 +40,7 @@ export const ParticipantInfo = ({
   isPrimaryCam,
   isLocalParticipant,
   hideParticipant,
+  doctorStyle,
 }: ParticipantInfoProps) => {
   const publications = usePublications(participant)
 
@@ -62,7 +64,7 @@ export const ParticipantInfo = ({
       data-cy-participant={participant.identity}
       hideParticipant={hideParticipant}
     >
-      <InfoContainer >
+      <InfoContainer doctorStyle={doctorStyle}>
         {!isPrimaryCam && (<NetworkQualityLevel participant={participant} />)}
         <InfoRow >
           <Identity >
@@ -75,7 +77,7 @@ export const ParticipantInfo = ({
         </InfoRow>
         <div>{isSelected && <PinIcon />}</div>
       </InfoContainer>
-      <InnerContainer >
+      <InnerContainer doctorStyle={doctorStyle}>
         {(!isVideoEnabled || isVideoSwitchedOff) && (
           <AvatarContainer>
             <AvatarIcon />

@@ -10,27 +10,30 @@ import {
 
 type TProps = {
   isPrimaryCam?: boolean;
+  doctorStyle?: boolean;
 }
 
 type TJustOneProps = {
   localParticipant: IParticipant;
   isPrimaryCam: boolean | undefined;
+  doctorStyle?: boolean;
 }
 
-const JustOneParticipant = ({ localParticipant, isPrimaryCam }: TJustOneProps) => (
+const JustOneParticipant = ({ localParticipant, isPrimaryCam, doctorStyle }: TJustOneProps) => (
   <>
     {isPrimaryCam ? (
       <ContainerFull>
         <Participant
           participant={localParticipant}
           isPrimaryCam={isPrimaryCam}
+          doctorStyle={doctorStyle}
         />
       </ContainerFull>) : null}
   </>
 )
 
 export const ParticipantList = (props: TProps) => {
-  const { isPrimaryCam } = props
+  const { isPrimaryCam, doctorStyle } = props
   const { room } = useVideoContext()
   const localParticipant = room!.localParticipant
   const participants = useParticipants()
@@ -47,6 +50,7 @@ export const ParticipantList = (props: TProps) => {
     <JustOneParticipant
       localParticipant={localParticipant}
       isPrimaryCam={isPrimaryCam}
+      doctorStyle={doctorStyle}
     />
   ) : isPrimaryCam ? (
     <ContainerFull>
@@ -58,6 +62,7 @@ export const ParticipantList = (props: TProps) => {
             isPrimaryCam={isPrimaryCam}
             isSelected={participant === selectedParticipant}
             hideParticipant={!isPrimaryCam}
+            doctorStyle={doctorStyle}
           />
         )
       })}

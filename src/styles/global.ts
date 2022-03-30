@@ -18,6 +18,7 @@ export default createGlobalStyle`
     user-select: none;
     background: url(${logo}) center top no-repeat, url(${awsCharacter}) left bottom no-repeat;
     background-size: 15em, 10em;
+    overflow: hidden;
   }
 
   main {

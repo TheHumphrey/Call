@@ -4,6 +4,10 @@ type TContainer = {
   hideParticipant?: boolean;
 }
 
+type TInnerContainer = {
+  doctorStyle?: boolean
+}
+
 export const Container = styled.div<TContainer>`
   position: relative;
   display: ${({ hideParticipant }) => hideParticipant ? 'none' : 'flex'};
@@ -25,7 +29,7 @@ export const ContainerPrimary = styled.div<TContainer>`
   background: black;
 `
 
-export const InfoContainer = styled.div`
+export const InfoContainer = styled.div<TInnerContainer>`
   position: absolute;
   display: flex;
   height: 100%;
@@ -34,12 +38,14 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   
-  top: 0;
+  top: ${({ doctorStyle }) => doctorStyle ? '25.2%' : '0'};
+  left: ${({ doctorStyle }) => doctorStyle ? '20.1%' : '0'};
+  
   z-index: 2;
   background: transparent;
 `
 
-export const InfoRowBottom = styled.div`
+export const InfoRowBottom = styled.div<TInnerContainer>`
   position: absolute;
   display: flex;
 
@@ -75,12 +81,12 @@ export const Typography = styled.span`
   color: ${({ theme }) => theme.colors.white};
 `
 
-export const InnerContainer = styled.div`
+export const InnerContainer = styled.div<TInnerContainer>`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: ${({ doctorStyle }) => doctorStyle ? '25%' : '0'};
+  left: ${({ doctorStyle }) => doctorStyle ? '20%' : '0'};
+  width: ${({ doctorStyle }) => doctorStyle ? '60%' : '100%'};
+  height: ${({ doctorStyle }) => doctorStyle ? '70%' : '100%'};
 `
 
 export const ReconnectingContainer = styled.div`

@@ -22,6 +22,9 @@ export const Title = styled.h1`
   line-height: 18px;
   text-align: left;
   letter-spacing: 8%;
+  @media only screen and (max-width: 1380px) {
+    margin: 2.2%;
+  }
 `
 
 export const Text = styled.span`
