@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-import logo from 'assets/logo-umc.jpeg'
+import logo from 'assets/logo-umc.png'
 import awsCharacter from 'assets/aws-med-character.png'
 
 export default createGlobalStyle`
