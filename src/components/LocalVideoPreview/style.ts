@@ -6,6 +6,10 @@ export const Container = styled.div`
   height: 0;
   overflow: hidden;
   background: black;
+
+  @media only screen and (max-width: 1366px) {
+    padding: 27%;
+  }
 `
 
 export const InnerContainer = styled.div`

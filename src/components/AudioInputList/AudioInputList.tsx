@@ -7,6 +7,10 @@ import styled from 'styled-components'
 const Container = styled.div`
   width: 375px;
   height: 40px;
+
+  @media only screen and (max-width: 1366px) {
+    width: 355px;
+  }
 `
 
 const SelectCustom = styled(Select)`
