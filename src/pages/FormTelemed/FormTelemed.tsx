@@ -112,7 +112,7 @@ export const FormTelemd = () => {
 
           <LabelCheck>
             <BsBagCheckFillCustom color="#2395FF" />
-            Configura seu áudio e vídeo
+            Configure seu áudio e vídeo
           </LabelCheck>
 
           {/* <DropdownContainer>
