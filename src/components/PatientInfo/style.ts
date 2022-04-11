@@ -13,7 +13,7 @@ export const ContainerTitle = styled.div<TContainerProps>`
 `
 
 export const Title = styled.h1`
-  font-family: 'Work Sans';
+  font-family: 'Roboto';
   color: ${({ theme }) => theme.colors.primary};
   width: 254px;
   height: 56px;
@@ -22,8 +22,12 @@ export const Title = styled.h1`
   line-height: 18px;
   text-align: left;
   letter-spacing: 8%;
+  margin-left: 0;
+
   @media only screen and (max-width: 1380px) {
-    margin: 2.2%;
+    margin: 1%;
+    height: 28px;
+    margin-left: 0;
   }
 `
 

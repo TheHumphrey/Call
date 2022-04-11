@@ -29,7 +29,7 @@ export const WebCam = styled.div`
   margin-left: 45px;
 
   @media only screen and (max-width: 1366px) {
-    margin-left: 100px;
+    margin-left: 140px;
   }
 `
 
@@ -41,8 +41,8 @@ export const ContainerInput = styled.div`
   margin-top: 100px;
 
   @media only screen and (max-width: 1366px) {
-    margin-top: 80px;
-    margin-left: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
   }
 `
 

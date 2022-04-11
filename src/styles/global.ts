@@ -19,6 +19,10 @@ export default createGlobalStyle`
     background: url(${logo}) center top no-repeat, url(${awsCharacter}) left bottom no-repeat;
     background-size: 15em, 10em;
     overflow: hidden;
+
+    @media only screen and (max-width: 1366px) {
+    background-size: 12em, 7em;
+  }
   }
 
   main {
