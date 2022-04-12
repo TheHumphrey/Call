@@ -67,10 +67,6 @@ export const ModalBox = styled(Box)`
   background: white;
   width: 70%;
   height: 68%;
-
-  @media only screen and (max-width: 1366px) {
-    height: 76%;
-  }
 `
 
 export const Container = styled.div`
@@ -198,10 +194,6 @@ export const SideMenu = styled.div<TSecundaryCam>`
 
   background-color: ${({ theme }) => theme.colors.grayDark};
   border-radius: 4px;
-
-  @media only screen and (max-width: 1366px) {
-    bottom: 28%;
-  }
 `
 
 export const PacientInfoContainer = styled.div`
