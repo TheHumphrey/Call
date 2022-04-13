@@ -7,7 +7,6 @@ import {
   PrimaryCam,
   TopMenu,
   TimerMenu,
-  ResolutionMenu,
   BottomMenu,
   SecondaryCam,
   SideMenu,
@@ -22,13 +21,10 @@ import {
   ModalBox,
   XIcon,
   CamContainer,
+  BsTelephoneXFillCustom,
+  BsArrowsFullscreenCustom,
+  BsFullscreenExitCustom
 } from './style'
-
-import {
-  BsTelephoneXFill,
-  BsArrowsFullscreen,
-  BsFullscreenExit,
-} from "react-icons/bs"
 
 
 import {
@@ -125,7 +121,6 @@ export const DoctorRoom = () => {
           <TimerMenu>
             {`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
           </TimerMenu>
-          <ResolutionMenu>HD</ResolutionMenu>
         </TopMenu>
 
         <BottomMenu>
@@ -136,13 +131,13 @@ export const DoctorRoom = () => {
 
           <CallButton onClick={handleDisconnect}>
             <CallButtonIcon>
-              <BsTelephoneXFill />
+              <BsTelephoneXFillCustom />
             </CallButtonIcon>
           </CallButton>
 
           <CallButton onClick={handleFullscreen}>
             <FullButtonIcon>
-              {screen ? (<BsFullscreenExit />) : (<BsArrowsFullscreen />)}
+              {screen ? (<BsFullscreenExitCustom />) : (<BsArrowsFullscreenCustom />)}
             </FullButtonIcon>
           </CallButton>
 

@@ -28,8 +28,13 @@ export const TextArea = styled(TextareaAutosize)`
 
 export const ButtonCustom = styled(Button)`
   min-width: auto !important;
-  padding: 0;
+  padding: 4px !important;
   padding-bottom: 2px !important;
+
+  @media only screen and (max-width: 911px) {
+    width: 30px;
+    height: 30px;
+  }
 `
 
 export const ButtonContainer = styled.div`

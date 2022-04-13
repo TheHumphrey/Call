@@ -21,8 +21,12 @@ export default createGlobalStyle`
     overflow: hidden;
 
     @media only screen and (max-width: 1366px) {
-    background-size: 12em, 7em;
-  }
+      background-size: 12em, 7em;
+    }
+
+    @media only screen and (max-width: 911px) {
+      background-size: 7.5em, 4.5em;
+    }
   }
 
   main {

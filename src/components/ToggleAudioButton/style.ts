@@ -17,4 +17,14 @@ export const IconButton = styled.button<TIconButton>`
   :hover {
     cursor: pointer;
   }
+
+  @media only screen and (max-width: 1366px) {
+    width: 34px;
+    height: 34px;
+  }
+
+  @media only screen and (max-width: 911px) {
+    width: 24px;
+    height: 24px;
+  }
 `

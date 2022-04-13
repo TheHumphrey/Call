@@ -32,6 +32,8 @@ const AudioLevelIndicator = (props: TProps) => {
   const { audioTrack, disabled, fill } = props
 
   const [color, setColor] = useState('white')
+  const [width, setWidth] = useState(24)
+  const [viewBox, setViewBox] = useState('0 0 24 24')
 
   const SVGRectRef = useRef<SVGRectElement>(null)
   const [analyser, setAnalyser] = useState<AnalyserNode>()
@@ -41,6 +43,11 @@ const AudioLevelIndicator = (props: TProps) => {
   useEffect(() => {
     fill ? setColor(disabled ? theme.colors.grayLight : isTrackEnabled ? fill : theme.colors.secondary) :
       setColor(disabled ? theme.colors.grayLight : isTrackEnabled ? theme.colors.primary : theme.colors.secondary)
+
+    if (window.screen.width === 1366 && window.devicePixelRatio === 1.5) {
+      setWidth(17)
+      setViewBox('4 0 24 20')
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTrackEnabled, disabled])
@@ -100,7 +107,7 @@ const AudioLevelIndicator = (props: TProps) => {
   const clipPathId = `audio-level-clip-${getUniqueClipId()}`
 
   return isTrackEnabled ? (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" data-test-audio-indicator>
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={width} viewBox={viewBox} data-test-audio-indicator>
       <defs>
         <clipPath id={clipPathId}>
           <rect ref={SVGRectRef} x="0" y="14" width="24" height="24" />
@@ -127,9 +134,9 @@ const AudioLevelIndicator = (props: TProps) => {
   ) : (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      width={width}
+      height={width}
+      viewBox={viewBox}
       transform="translate(-0.5, 0)"
       data-test-audio-mute-icon
     >

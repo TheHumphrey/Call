@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { LocalAudioTrack } from 'twilio-video'
-import { FormControl, MenuItem, Typography, Select } from '@material-ui/core'
+import { FormControl, MenuItem, Select } from '@material-ui/core'
 import { SELECTED_AUDIO_INPUT_KEY } from 'utils/constants'
 import { useDevices, useMediaStreamTrack, useVideoContext } from 'hooks'
 import styled from 'styled-components'
@@ -10,12 +10,33 @@ const Container = styled.div`
   height: 40px;
 
   @media only screen and (max-width: 1366px) {
-    width: 355px;
+    width: 305px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  @media only screen and (max-width: 911px) {
+    width: 224px;
+    height: 24px;
   }
 `
 
 const SelectCustom = styled(Select)`
   height: 40px;
+
+  @media only screen and (max-width: 1366px) {
+    height: 34px;
+    .MuiSelect-select{
+      font-size: 16px;
+    }
+  }
+
+  @media only screen and (max-width: 911px) {
+    height: 24px;
+    .MuiSelect-select{
+      font-size: 12px;
+    }
+  }
 `
 
 export const AudioInputList = () => {
@@ -47,7 +68,7 @@ export const AudioInputList = () => {
               variant="outlined"
             >
               {audioList.map((device: any) => (
-                <MenuItem value={device.deviceId} key={device.deviceId}>
+                <MenuItem value={device.deviceId} key={device.deviceId} className="test">
                   {device.label}
                 </MenuItem>
               ))}
