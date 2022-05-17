@@ -31,10 +31,10 @@ import {
 export const DoctorLobby = () => {
   const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
   // const { getToken, isFetching } = useAppState()
-  const { getToken } = useAppState()
+  const { getTokenDoctor } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const { patient, doctor } = useDoctorContext()
-  const { URLRoomName } = useParams()
+  const { URLRoomName, token } = useParams()
 
   const doctorName = doctor?.user?.name
 
@@ -51,9 +51,10 @@ export const DoctorLobby = () => {
 
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(doctorName || 'Doutor', URLRoomName).then(({ access_token }) => {
-      videoConnect(access_token)
-      chatConnect(access_token)
+    if (!token) return
+    getTokenDoctor(URLRoomName, doctor?.user?.professionalId, token).then(({ accessToken }) => {
+      videoConnect(accessToken)
+      chatConnect(accessToken)
     })
   }
 
@@ -67,7 +68,7 @@ export const DoctorLobby = () => {
         <ContainerInput>
           <LabelCheck>
             <BsBagCheckFillCustom color="#2395FF" />
-            Configra seu áudio e vídeo
+            Configure seu áudio e vídeo
           </LabelCheck>
 
           {/* <DropdownContainer>

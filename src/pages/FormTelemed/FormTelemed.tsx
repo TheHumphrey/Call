@@ -13,6 +13,8 @@ import {
   LabelCheck,
 } from './style'
 
+import { CircularProgress, LinearProgress } from "@material-ui/core"
+
 import { useParams } from 'react-router-dom'
 
 import {
@@ -37,9 +39,9 @@ const initialPacient = {
 
 export const FormTelemd = () => {
   const [paciente, setPaciente] = useState<TPatient>(initialPacient as TPatient)
+  const [isFetching, setIsFetching] = useState(false)
   // const { getAudioAndVideoTracks, connect: videoConnect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
   const { getAudioAndVideoTracks, connect: videoConnect } = useVideoContext()
-  // const { getToken, isFetching } = useAppState()
   const { getToken } = useAppState()
   const { connect: chatConnect } = useChatContext()
   const [username, setUsername] = useState('')
@@ -74,10 +76,11 @@ export const FormTelemd = () => {
 
   const handleJoin = () => {
     if (!URLRoomName) return
-    getToken(username, URLRoomName).then(({ access_token }) => {
-      videoConnect(access_token)
-      chatConnect(access_token)
-    })
+    setIsFetching(true)
+    getToken(username, URLRoomName).then(({ accessToken }) => {
+      videoConnect(accessToken).then(() => setIsFetching(false))
+      chatConnect(accessToken)
+    }).catch(() => setIsFetching(false))
     updatePatientInfo()
   }
 
@@ -109,7 +112,7 @@ export const FormTelemd = () => {
 
           <LabelCheck>
             <BsBagCheckFillCustom color="#2395FF" />
-            Configra seu áudio e vídeo
+            Configure seu áudio e vídeo
           </LabelCheck>
 
           {/* <DropdownContainer>
@@ -123,7 +126,7 @@ export const FormTelemd = () => {
             <AudioInputList />
           </DropdownContainer>
 
-          <ButtonJoin onClick={handleJoin}>Entrar na consulta</ButtonJoin>
+          <ButtonJoin onClick={handleJoin}>{isFetching ? <LinearProgress /> : 'Entrar na consulta'}</ButtonJoin>
         </ContainerInput>
       </ContainerSettings>
     </Container>

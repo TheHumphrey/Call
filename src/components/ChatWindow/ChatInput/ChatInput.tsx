@@ -96,7 +96,7 @@ export const ChatInput = ({ channel, isChatWindowOpen }: ChatInputProps) => {
             minRows={1}
             maxRows={6}
             aria-label="chat input"
-            placeholder="Escreva uma mensagem..."
+            placeholder="..."
             onKeyPress={handleReturnKeyPress}
             onChange={handleChange}
             value={messageBody}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Participant, useSelectedParticipant } from 'components'
 import { useParticipants, useVideoContext } from 'hooks'
+import { Participant as IParticipant } from 'twilio-video'
 
 import {
   Container,
@@ -9,10 +10,30 @@ import {
 
 type TProps = {
   isPrimaryCam?: boolean;
+  doctorStyle?: boolean;
 }
 
+type TJustOneProps = {
+  localParticipant: IParticipant;
+  isPrimaryCam: boolean | undefined;
+  doctorStyle?: boolean;
+}
+
+const JustOneParticipant = ({ localParticipant, isPrimaryCam, doctorStyle }: TJustOneProps) => (
+  <>
+    {isPrimaryCam ? (
+      <ContainerFull>
+        <Participant
+          participant={localParticipant}
+          isPrimaryCam={isPrimaryCam}
+          doctorStyle={doctorStyle}
+        />
+      </ContainerFull>) : null}
+  </>
+)
+
 export const ParticipantList = (props: TProps) => {
-  const { isPrimaryCam } = props
+  const { isPrimaryCam, doctorStyle } = props
   const { room } = useVideoContext()
   const localParticipant = room!.localParticipant
   const participants = useParticipants()
@@ -25,7 +46,13 @@ export const ParticipantList = (props: TProps) => {
     }, [participants]
   )
 
-  return isRender ? null : isPrimaryCam ? (
+  return isRender ? (
+    <JustOneParticipant
+      localParticipant={localParticipant}
+      isPrimaryCam={isPrimaryCam}
+      doctorStyle={doctorStyle}
+    />
+  ) : isPrimaryCam ? (
     <ContainerFull>
       {participants.map(participant => {
         return (
@@ -35,13 +62,14 @@ export const ParticipantList = (props: TProps) => {
             isPrimaryCam={isPrimaryCam}
             isSelected={participant === selectedParticipant}
             hideParticipant={!isPrimaryCam}
+            doctorStyle={doctorStyle}
           />
         )
       })}
     </ContainerFull>
   ) : (
     <Container>
-      <Participant participant={localParticipant} isLocalParticipant={true} />
+      <Participant participant={localParticipant} isLocalParticipant={true} withBorder />
     </Container>
   )
 }

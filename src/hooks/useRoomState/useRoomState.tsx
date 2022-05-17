@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useVideoContext } from 'hooks'
 
-type RoomStateType = 'disconnected' | 'connected' | 'reconnecting'
+export type RoomStateType = 'disconnected' | 'connected' | 'reconnecting'
 
 export const useRoomState = () => {
   const { room } = useVideoContext()

@@ -1,4 +1,11 @@
 export { FormTelemd } from './FormTelemed/FormTelemed'
 export { Room } from './Room/Room'
 export { RoomNotFound } from './RoomNotFound/RoomNotFound'
-export { DoctorLobby } from './DoctorLobby/DoctorLobby'
+// export { DoctorLobby } from './DoctorLobby/DoctorLobby'
+export { DoctorRoom } from './DoctorRoom/DoctorRoom'
+
+export { StartPage } from './StartPage/StartPage'
+export { PatientForm } from './PatientForm/PatientForm'
+export { PatientLobby } from './PatientLobby/PatientLobby'
+export { DoctorStart } from './DoctorStart/DoctorStart'
+export { DoctorLobby } from './DoctorLobby/DoctorLobbyNewDesign'

@@ -14,6 +14,10 @@ export { Participant } from './Participant/Participant'
 export { ParticipantInfo } from './ParticipantInfo/ParticipantInfo'
 export { ParticipantList } from './ParticipantList/ParticipantList'
 export { Snackbar } from './Snackbar/Snackbar'
+export { CheckBox } from './CheckBox/CheckBox'
+
+export { PatientHeader, DoctorHeader } from './InfoHeader/InfoHeader'
+export { PatientContext, PatientProvider } from './PatientProvider/PatientProvider'
 
 export { ChatWindow } from './ChatWindow/ChatWindow'
 export { MessageList } from './ChatWindow/MessageList/MessageList'
@@ -21,6 +25,7 @@ export { TextMessage } from './ChatWindow/MessageList/TextMessage/TextMessage'
 export { FileMessage, formatFileSize } from './ChatWindow/MessageList/MediaMessage/MediaMessage'
 export { MessageInfo } from './ChatWindow/MessageList/MessageInfo/MessageInfo'
 export { ChatInput } from './ChatWindow/ChatInput/ChatInput'
+export { ToggleChatButton } from './ToggleChatButton/ToggleChatButton'
 export { ChatWindowHeader } from './ChatWindow/ChatWindowHeader/ChatWindowHeader'
 
 export { ChatContext } from './ChatProvider/ChatProvider'

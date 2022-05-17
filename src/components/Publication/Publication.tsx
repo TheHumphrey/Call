@@ -18,9 +18,11 @@ interface PublicationProps {
   isLocalParticipant?: boolean;
   videoOnly?: boolean;
   videoPriority?: Track.Priority | null;
+  doctorStyle?: boolean;
+  withBorder?: boolean;
 }
 
-export const Publication = ({ publication, isLocalParticipant, videoOnly, videoPriority }: PublicationProps) => {
+export const Publication = ({ publication, isLocalParticipant, videoOnly, videoPriority, doctorStyle, withBorder }: PublicationProps) => {
   const track = useTrack(publication)
 
   if (!track) return null
@@ -32,6 +34,8 @@ export const Publication = ({ publication, isLocalParticipant, videoOnly, videoP
           track={track as IVideoTrack}
           priority={videoPriority}
           isLocal={!track.name.includes('screen') && isLocalParticipant}
+          doctorStyle={doctorStyle}
+          withBorder={withBorder}
         />
       )
     case 'audio':

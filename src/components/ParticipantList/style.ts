@@ -6,7 +6,7 @@ export const Container = styled.aside`
   z-index: 5;
   width: ${`calc(300px - 3em)`};
   justify-content: center;
-  border-radius: 2px;
+  border-radius: 8px;
 `
 
 export const ContainerFull = styled.aside`

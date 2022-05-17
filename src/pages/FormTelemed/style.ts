@@ -27,6 +27,10 @@ export const WebCam = styled.div`
   width: 884px;
   height: 497px;
   margin-left: 45px;
+
+  @media only screen and (max-width: 1366px) {
+    margin-left: 140px;
+  }
 `
 
 export const ContainerInput = styled.div`
@@ -35,6 +39,11 @@ export const ContainerInput = styled.div`
 
   margin-left: 65px;
   margin-top: 100px;
+
+  @media only screen and (max-width: 1366px) {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
 `
 
 export const Label = styled.label<TLabel>`
@@ -80,6 +89,10 @@ export const UsernameInput = styled.input`
   :focus-visible {
     outline-color: ${({ theme }) => theme.colors.whiteDark};
   }
+
+  @media only screen and (max-width: 1366px) {
+    width: 450px;
+  }
 `
 
 export const ButtonJoin = styled.button`
@@ -102,6 +115,11 @@ export const ButtonJoin = styled.button`
     transition: 0,5s;
     background-color: ${({ theme }) => theme.colors.blueMedium};
   }
+
+  @media only screen and (max-width: 1366px) {
+    width: 450px;
+    margin-right: 30px;
+  }
 `
 
 export const DropdownContainer = styled.div`
@@ -110,6 +128,10 @@ export const DropdownContainer = styled.div`
   justify-content: space-between;
 
   margin-top: 20px;
+
+  @media only screen and (max-width: 1366px) {
+    width: 450px;
+  }
 `
 
 export const IconButton = styled.button<TIconButton>`
