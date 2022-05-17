@@ -69,7 +69,7 @@ export const ParticipantList = (props: TProps) => {
     </ContainerFull>
   ) : (
     <Container>
-      <Participant participant={localParticipant} isLocalParticipant={true} />
+      <Participant participant={localParticipant} isLocalParticipant={true} withBorder />
     </Container>
   )
 }

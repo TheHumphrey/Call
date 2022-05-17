@@ -6,11 +6,7 @@ export const Container = styled.aside`
   z-index: 5;
   width: ${`calc(300px - 3em)`};
   justify-content: center;
-  border-radius: 2px;
-
-  @media only screen and (max-width: 911px) {
-    width: ${`calc(250px - 3em)`};
-  }
+  border-radius: 8px;
 `
 
 export const ContainerFull = styled.aside`

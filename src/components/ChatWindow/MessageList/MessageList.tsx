@@ -13,7 +13,7 @@ const getFormattedTime = (message?: Message) =>
 
 export const MessageList = ({ messages }: MessageListProps) => {
   const { room } = useVideoContext()
-  const localParticipant = room!.localParticipant
+  const localParticipant = room?.localParticipant
 
   return (
     <MessageListScrollContainer messages={messages}>
@@ -23,7 +23,7 @@ export const MessageList = ({ messages }: MessageListProps) => {
 
         const shouldDisplayMessageInfo = time !== previousTime || message.author !== messages[idx - 1]?.author
 
-        const isLocalParticipant = localParticipant.identity === message.author
+        const isLocalParticipant = localParticipant?.identity === message.author
 
         return (
           <React.Fragment key={message.sid}>

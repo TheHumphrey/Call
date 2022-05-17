@@ -9,10 +9,12 @@ interface VideoTrackProps {
   track: IVideoTrack;
   isLocal?: boolean;
   priority?: Track.Priority | null;
+  doctorStyle?: boolean;
+  withBorder?: boolean;
 }
 
 export const VideoTrack = (props: VideoTrackProps) => {
-  const { track, isLocal, priority } = props
+  const { track, isLocal, priority, withBorder } = props
   const ref = useRef<HTMLVideoElement>(null!)
   const mediaStreamTrack = useMediaStreamTrack(track)
   const dimensions = useVideoTrackDimensions(track)
@@ -42,5 +44,5 @@ export const VideoTrack = (props: VideoTrackProps) => {
     objectFit: isPortrait || track.name.includes('screen') ? ('contain' as const) : ('cover' as const),
   }
 
-  return <Video ref={ref} style={style} />
+  return <Video ref={ref} style={style} doctorStyle={props.doctorStyle} withBorder={withBorder} />
 }

@@ -29,12 +29,6 @@ export const Title = styled.h1`
     height: 28px;
     margin-left: 0;
   }
-
-  @media only screen and (max-width: 911px) {
-    margin: 1%;
-    height: 24px;
-    margin-left: 0;
-  }
 `
 
 export const Text = styled.span`
@@ -44,14 +38,6 @@ export const Text = styled.span`
   color: ${({ theme }) => theme.colors.grayLight};
   line-height: 21,09px;
   text-align: left;
-
-  @media only screen and (max-width: 1380px) {
-    font-size: 16px
-  }
-
-  @media only screen and (max-width: 911px) {
-    font-size: 12px
-  }
 `
 
 export const SubText = styled.span`
@@ -63,12 +49,4 @@ export const SubText = styled.span`
 
   white-space: normal;
   word-break: break-all;
-
-  @media only screen and (max-width: 1380px) {
-    font-size: 16px
-  }
-
-  @media only screen and (max-width: 911px) {
-    font-size: 12px
-  }
 `

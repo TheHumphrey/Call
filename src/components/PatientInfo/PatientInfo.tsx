@@ -63,10 +63,12 @@ export const PatientInfo = (props: TProps) => {
       )}
 
       {
-        <Text>
-          Motivo consulta:{' '}
-          <SubText>{reason || ''}</SubText>
-        </Text>
+        reason && (
+          <Text>
+            Motivo consulta:{' '}
+            <SubText>{reason || ''}</SubText>
+          </Text>
+        )
       }
     </ContainerTitle>
   )

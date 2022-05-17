@@ -6,6 +6,7 @@ export const Container = styled.div`
   height: 0;
   overflow: hidden;
   background: black;
+  border-radius: 8px;
 
   @media only screen and (max-width: 1366px) {
     padding: 27%;
@@ -48,14 +49,6 @@ export const Identity = styled.span`
   margin: 0;
   display: flex;
   align-items: center;
-
-  @media only screen and (max-width: 1366px) {
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    font-size: 12px;
-  }
 `
 
 export const Typography = styled.span`

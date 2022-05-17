@@ -9,9 +9,6 @@ import {
   BsFileEarmarkText,
   BsClipboardX,
   BsX,
-  BsTelephoneXFill,
-  BsArrowsFullscreen,
-  BsFullscreenExit,
 } from "react-icons/bs"
 
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
@@ -22,41 +19,20 @@ type TSecundaryCam = {
 
 export const styleIcon = (icon: IconType) => {
   return styled(icon)`
-  display: flex;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  color: ${({ theme }) => theme.colors.grayLight};
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: ${({ theme }) => theme.colors.grayLight};
+    justify-content: center;
+    align-items: center;
 
-  :hover {
-    color: ${({ theme }) => theme.colors.white};
-    transition: .2s;
-  }
-
-  @media only screen and (max-width: 911px) {
-    width: 30px;
-    height: 30px;
-    margin-top: 10px;
-  }
-`
+    :hover {
+      color: ${({ theme }) => theme.colors.white};
+      transition: .2s;
+    }
+  `
 }
-
-export const styleIconBottomMenu = (icon: IconType) => {
-  return styled(icon)`
-  @media only screen and (max-width: 911px) {
-    width: 14px;
-    height: 14px;
-  }
-`
-}
-
-export const BsTelephoneXFillCustom = styleIconBottomMenu(BsTelephoneXFill)
-
-export const BsArrowsFullscreenCustom = styleIconBottomMenu(BsArrowsFullscreen)
-
-export const BsFullscreenExitCustom = styleIconBottomMenu(BsFullscreenExit)
 
 export const FileIcon = styleIcon(BsFileEarmarkText)
 
@@ -133,10 +109,6 @@ export const TopMenu = styled.div`
   @media only screen and (max-width: 1280px) {
     left: 40%;
   }
-
-  @media only screen and (max-width: 911px) {
-    left: 35%;
-  }
 `
 
 export const LabelMenu = styled.div`
@@ -207,11 +179,6 @@ export const BottomMenu = styled.div`
   background-color: ${({ theme }) => theme.colors.grayDark};
   flex-direction: row;
   border-radius: 4px;
-
-  @media only screen and (max-width: 911px) {
-    width: 180px;
-    height: 36px;
-  }
 `
 
 export const SideMenu = styled.div<TSecundaryCam>`
@@ -227,14 +194,6 @@ export const SideMenu = styled.div<TSecundaryCam>`
 
   background-color: ${({ theme }) => theme.colors.grayDark};
   border-radius: 4px;
-
-  @media only screen and (max-width: 911px) {
-    width: 36px;
-    height: 82px;
-
-    right: 21%;
-    bottom: 22%;
-  }
 `
 
 export const PacientInfoContainer = styled.div`
@@ -251,19 +210,13 @@ export const PacientInfoContainer = styled.div`
 export const SecondaryCam = styled.div<TSecundaryCam>`
   display: flex;
   width: 280px;
+  height: 158px;
   position: absolute;
 
   top: 26%;
   right: 19%;
 
   border-radius: 2px;
-
-  @media only screen and (max-width: 911px) {
-    width: 250px;
-    
-    top: 25.5%;
-    right: 14.9%;
-  }
 `
 
 export const BottomButton = styled.button`
@@ -307,11 +260,6 @@ export const CallButton = styled.button`
   :hover {
     cursor: pointer;
   }
-
-  @media only screen and (max-width: 911px) {
-    width: 36px;
-    height: 36px;
-  }
 `
 
 export const AudioButton = styled(ToggleAudioButton)`
@@ -320,11 +268,6 @@ export const AudioButton = styled(ToggleAudioButton)`
 
   background-color: transparent;
   font-size: 20px;
-
-  @media only screen and (max-width: 911px) {
-    width: 36px;
-    height: 36px;
-  }
 `
 
 export const VideoButton = styled(ToggleVideoButton)`
@@ -332,11 +275,6 @@ export const VideoButton = styled(ToggleVideoButton)`
   height: 56px;
   background-color: transparent;
   font-size: 20px;
-
-  @media only screen and (max-width: 911px) {
-    width: 36px;
-    height: 36px;
-  }
 `
 
 export const CallButtonIcon = styled.div`
@@ -347,11 +285,6 @@ export const CallButtonIcon = styled.div`
   background-color: ${({ theme }) => theme.colors.secondary};
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 911px) {
-    width: 30px;
-    height: 30px;
-  }
 `
 
 export const FullButtonIcon = styled.div`
@@ -362,11 +295,6 @@ export const FullButtonIcon = styled.div`
   color: ${({ theme }) => theme.colors.white};
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 911px) {
-    width: 36px;
-    height: 36px;
-  }
 `
 
 export const SecundaryMenu = styled.div`

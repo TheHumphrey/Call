@@ -4,22 +4,6 @@ import { useDevices, useLocalVideoToggle } from "hooks"
 import { BsCameraVideo, BsCameraVideoOff } from "react-icons/bs"
 
 import { IconButton } from "./style"
-import styled from 'styled-components';
-
-const BsCameraVideoCustom = styled(BsCameraVideo)`
-  @media only screen and (max-width: 911px) {
-    margin-top: 3px;
-    width: 13px;
-    height: 13px;
-  }
-`
-const BsCameraVideoOffCustom = styled(BsCameraVideoOff)`
-  @media only screen and (max-width: 911px) {
-    margin-top: 3px;
-    width: 13px;
-    height: 13px;
-  }
-`
 
 export const ToggleVideoButton = (props: { disabled?: boolean; className?: string, fill?: string }) => {
   const { disabled, className, fill } = props
@@ -43,7 +27,7 @@ export const ToggleVideoButton = (props: { disabled?: boolean; className?: strin
         disabled={!hasVideoInputDevices || disabled}
         fill={fill}
       >
-        {isVideoEnabled ? (<BsCameraVideoCustom />) : (<BsCameraVideoOffCustom />)}
+        {isVideoEnabled ? (<BsCameraVideo />) : (<BsCameraVideoOff />)}
       </IconButton>
     </>
   )

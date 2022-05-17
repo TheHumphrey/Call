@@ -8,7 +8,8 @@ import usePasscodeAuth from './usePasscodeAuth/usePasscodeAuth'
 export interface StateContextType {
   error: TwilioError | Error | null;
   setError(error: TwilioError | Error | null): void;
-  getToken(name: string, room: string, passcode?: string): Promise<{ room_type: RoomType; access_token: string }>
+  getToken(name: string, room: string, passcode?: string): Promise<{ room_type: RoomType; accessToken: string }>
+  getTokenDoctor(name: string, room: string, authToken: string, passcode?: string): Promise<{ room_type: RoomType; accessToken: string }>
   signIn?(passcode?: string): Promise<void>;
   signOut?(): Promise<void>;
   isAuthReady?: boolean;
@@ -49,8 +50,8 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
   } else {
     contextValue = {
       ...contextValue,
-      getToken: async (identity_user, room) => {
-        const endpoint = process.env.REACT_APP_TOKEN_ENDPOINT || '/token'
+      getToken: async (tenant, code) => {
+        const endpoint = `${process.env.REACT_APP_TOKEN_ENDPOINT}api/video-calls/patients/access-tokens` || '/token'
 
         return fetch(endpoint, {
           method: 'POST',
@@ -58,8 +59,23 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
             'content-type': 'application/json',
           },
           body: JSON.stringify({
-            identity_user,
-            room,
+            tenant,
+            code,
+          }),
+        }).then(res => res.json())
+      },
+      getTokenDoctor: async (code, professionalId, authToken) => {
+        const endpoint = `${process.env.REACT_APP_TOKEN_ENDPOINT}api/video-calls/professionals/access-tokens` || '/token'
+
+        return fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-access-token': authToken
+          },
+          body: JSON.stringify({
+            professionalId,
+            code,
           }),
         }).then(res => res.json())
       },
@@ -92,10 +108,26 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
     }
   }
 
-  const getToken: StateContextType['getToken'] = (name, room) => {
+  const getToken: StateContextType['getToken'] = (tenant, code) => {
     setIsFetching(true)
     return contextValue
-      .getToken(name, room)
+      .getToken(tenant, code)
+      .then(res => {
+        setRoomType(res.room_type)
+        setIsFetching(false)
+        return res
+      })
+      .catch(err => {
+        setError(err)
+        setIsFetching(false)
+        return Promise.reject(err)
+      })
+  }
+
+  const getTokenDoctor: StateContextType['getTokenDoctor'] = (code, professionalId, authToken) => {
+    setIsFetching(true)
+    return contextValue
+      .getTokenDoctor(code, professionalId, authToken)
       .then(res => {
         setRoomType(res.room_type)
         setIsFetching(false)
@@ -124,7 +156,7 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
   }
 
   return (
-    <StateContext.Provider value={{ ...contextValue, getToken, updateRecordingRules }}>
+    <StateContext.Provider value={{ ...contextValue, getToken, getTokenDoctor, updateRecordingRules }}>
       {props.children}
     </StateContext.Provider>
   )

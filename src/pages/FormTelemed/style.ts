@@ -20,15 +20,7 @@ export const Container = styled.div`
 
 export const ContainerSettings = styled.div`
   display: flex;
-  margin-top: 40px;
-
-  @media only screen and (max-width: 1366px) {
-    margin-top: 20px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    margin-top: 10px;
-  }
+  margin-top: 60px;
 `
 
 export const WebCam = styled.div`
@@ -38,10 +30,6 @@ export const WebCam = styled.div`
 
   @media only screen and (max-width: 1366px) {
     margin-left: 140px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    margin-left: 70px;
   }
 `
 
@@ -53,13 +41,8 @@ export const ContainerInput = styled.div`
   margin-top: 100px;
 
   @media only screen and (max-width: 1366px) {
-    margin-top: 80px;
-    margin-left: 20px;
-  }
-
-  @media only screen and (max-width: 911px) {
     margin-top: 20px;
-    margin-left: 10px;
+    margin-left: 20px;
   }
 `
 
@@ -78,31 +61,10 @@ export const Label = styled.label<TLabel>`
   ${({ withMargin }) => withMargin && 'margin-top: 10px;'}
 
   color: ${({ theme }) => theme.colors.grayDark};
-
-  @media only screen and (max-width: 1366px) {
-    font-size: 16px;
-    ${({ withMargin }) => withMargin && 'margin-top: 4px;'}
-  }
-
-  @media only screen and (max-width: 911px) {
-    font-size: 12px;
-    ${({ withMargin }) => withMargin && 'margin-top: 2px;'}
-  }
 `
 
 export const LabelCheck = styled(Label)`
   margin-top: 20px;
-
-  @media only screen and (max-width: 1366px) {
-    margin-top: 10px;
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    margin-top: 5px;
-
-    font-size: 12px;
-  }
 `
 
 export const UsernameInput = styled.input`
@@ -129,15 +91,7 @@ export const UsernameInput = styled.input`
   }
 
   @media only screen and (max-width: 1366px) {
-    width: 400px;
-    height: 34px;
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    width: 280px;
-    height: 20px;
-    font-size: 12px;
+    width: 450px;
   }
 `
 
@@ -163,19 +117,8 @@ export const ButtonJoin = styled.button`
   }
 
   @media only screen and (max-width: 1366px) {
-    width: 400px;
-    height: 34px;
+    width: 450px;
     margin-right: 30px;
-    margin-top: 10px;
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    width: 280px;
-    height: 20px;
-    font-size: 12px;
-    margin-right: 30px;
-    margin-top: 10px;
   }
 `
 
@@ -187,17 +130,7 @@ export const DropdownContainer = styled.div`
   margin-top: 20px;
 
   @media only screen and (max-width: 1366px) {
-    width: 400px;
-    height: 34px;
-
-    margin-top: 10px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    width: 280px;
-    height: 24px;
-
-    margin-top: 5px;
+    width: 450px;
   }
 `
 
@@ -237,14 +170,6 @@ export const TempDropdownCamp = styled.input`
 
   :focus-visible {
     outline-color: ${({ theme }) => theme.colors.whiteDark};
-  }
-
-  @media only screen and (max-width: 1366px) {
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 911px) {
-    font-size: 12px;
   }
 `
 

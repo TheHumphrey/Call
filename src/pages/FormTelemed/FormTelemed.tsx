@@ -77,9 +77,9 @@ export const FormTelemd = () => {
   const handleJoin = () => {
     if (!URLRoomName) return
     setIsFetching(true)
-    getToken(username, URLRoomName).then(({ access_token }) => {
-      videoConnect(access_token).then(() => setIsFetching(false))
-      chatConnect(access_token)
+    getToken(username, URLRoomName).then(({ accessToken }) => {
+      videoConnect(accessToken).then(() => setIsFetching(false))
+      chatConnect(accessToken)
     }).catch(() => setIsFetching(false))
     updatePatientInfo()
   }

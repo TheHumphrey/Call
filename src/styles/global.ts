@@ -16,17 +16,14 @@ export default createGlobalStyle`
     margin: 0;
     color: #000;
     user-select: none;
-    background: url(${logo}) center top no-repeat, url(${awsCharacter}) left bottom no-repeat;
-    background-size: 15em, 10em;
+    background: ${({ theme }) => theme.colors.blueBackgroundLight};
+    /* background: url(${logo}) center top no-repeat, url(${awsCharacter}) left bottom no-repeat;
+    background-size: 15em, 10em; */
     overflow: hidden;
 
-    @media only screen and (max-width: 1366px) {
+    /* @media only screen and (max-width: 1366px) {
       background-size: 12em, 7em;
-    }
-
-    @media only screen and (max-width: 911px) {
-      background-size: 7.5em, 4.5em;
-    }
+    } */
   }
 
   main {

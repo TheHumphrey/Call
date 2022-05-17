@@ -9,6 +9,8 @@ interface ParticipantTracksProps {
   videoOnly?: boolean;
   videoPriority?: Track.Priority | null;
   isLocalParticipant?: boolean;
+  doctorStyle?: boolean;
+  withBorder?: boolean;
 }
 
 export const ParticipantTracks = ({
@@ -16,6 +18,7 @@ export const ParticipantTracks = ({
   videoOnly,
   videoPriority,
   isLocalParticipant,
+  doctorStyle,
 }: ParticipantTracksProps) => {
   const publications = usePublications(participant)
 
@@ -31,6 +34,7 @@ export const ParticipantTracks = ({
           isLocalParticipant={isLocalParticipant}
           videoOnly={videoOnly}
           videoPriority={videoPriority}
+          doctorStyle={doctorStyle}
         />
       ))}
     </>

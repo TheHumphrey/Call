@@ -5,7 +5,9 @@ type TContainer = {
 }
 
 type TInnerContainer = {
-  doctorStyle?: boolean
+  doctorStyle?: boolean;
+  isChatWindowOpen?: boolean;
+  isPrimaryCam?: boolean;
 }
 
 export const Container = styled.div<TContainer>`
@@ -14,10 +16,11 @@ export const Container = styled.div<TContainer>`
   align-items: center;
   height: 0;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 2px solid ${({ theme }) => theme.colors.white};
   padding-top: ${'calc(65% - 2px)'};
   background: black;
+
   :hover {
     cursor: pointer;
   }
@@ -38,8 +41,11 @@ export const InfoContainer = styled.div<TInnerContainer>`
   flex-direction: column;
   justify-content: space-between;
   
-  top: ${({ doctorStyle }) => doctorStyle ? '25.2%' : '0'};
-  left: ${({ doctorStyle }) => doctorStyle ? '20.1%' : '0'};
+  top: ${({ doctorStyle }) => doctorStyle ? '5%' : '0'};
+  left: ${({ doctorStyle }) => doctorStyle ? '43%' : '0'};
+
+  ${({ isChatWindowOpen, isPrimaryCam, doctorStyle }) => isChatWindowOpen && isPrimaryCam && doctorStyle && 'left: 38.4% !important;'}
+  ${({ isChatWindowOpen, isPrimaryCam, doctorStyle }) => isChatWindowOpen && isPrimaryCam && doctorStyle && 'top: 4.2% !important;'}
   
   z-index: 2;
   background: transparent;
@@ -65,7 +71,7 @@ export const InfoRowTop = styled.div`
   left: 0;
 `
 
-export const Identity = styled.div`
+export const Identity = styled.div<TInnerContainer>`
   display: flex;
   align-items: center;
 
@@ -74,6 +80,7 @@ export const Identity = styled.div`
 
   background: rgba(0, 0, 0, 0.5);
   color: ${({ theme }) => theme.colors.white};
+  border-radius: ${({ doctorStyle }) => doctorStyle ? '8px 0px 0px 0px' : '0px'};
 `
 
 export const Typography = styled.span`
@@ -83,10 +90,16 @@ export const Typography = styled.span`
 
 export const InnerContainer = styled.div<TInnerContainer>`
   position: absolute;
-  top: ${({ doctorStyle }) => doctorStyle ? '25%' : '0'};
-  left: ${({ doctorStyle }) => doctorStyle ? '20%' : '0'};
-  width: ${({ doctorStyle }) => doctorStyle ? '60%' : '100%'};
-  height: ${({ doctorStyle }) => doctorStyle ? '70%' : '100%'};
+  top: ${({ doctorStyle }) => doctorStyle ? '5%' : '0'};
+  left: ${({ doctorStyle }) => doctorStyle ? '43%' : '0'};
+  width: ${({ doctorStyle }) => doctorStyle ? '50%' : '100%'};
+  height: ${({ doctorStyle }) => doctorStyle ? '43%' : '100%'};
+  border-radius: 8px;
+
+  ${({ isChatWindowOpen, doctorStyle }) => isChatWindowOpen && doctorStyle && 'left: 38.4% !important;'}
+  ${({ isChatWindowOpen, doctorStyle }) => isChatWindowOpen && doctorStyle && 'width: 40% !important;'}
+  ${({ isChatWindowOpen, doctorStyle }) => isChatWindowOpen && doctorStyle && 'top: 4.2% !important;'}
+  ${({ isChatWindowOpen, doctorStyle }) => isChatWindowOpen && doctorStyle && 'height: 44.5% !important;'}
 `
 
 export const ReconnectingContainer = styled.div`
@@ -104,7 +117,7 @@ export const ReconnectingContainer = styled.div`
   background: rgba(40, 42, 43, 0.75);
 `
 
-export const AvatarContainer = styled.div`
+export const AvatarContainer = styled.div<TInnerContainer>`
   position: absolute;
   display: flex;
 
@@ -117,5 +130,6 @@ export const AvatarContainer = styled.div`
   left: 0;
   z-index: 1;
   background: black;
+  border-radius: ${({ doctorStyle }) => doctorStyle ? '8px' : '0px'};
 `
 

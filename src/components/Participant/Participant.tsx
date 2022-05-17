@@ -11,6 +11,7 @@ interface ParticipantProps {
   isLocalParticipant?: boolean;
   hideParticipant?: boolean;
   doctorStyle?: boolean;
+  withBorder?: boolean;
 }
 
 export const Participant = ({
@@ -37,6 +38,7 @@ export const Participant = ({
         participant={participant}
         videoOnly={videoOnly}
         isLocalParticipant={isLocalParticipant}
+        doctorStyle={doctorStyle}
       />
     </ParticipantInfo>
   )

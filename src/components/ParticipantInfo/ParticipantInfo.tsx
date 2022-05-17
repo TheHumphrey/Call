@@ -18,7 +18,7 @@ import {
   AvatarContainer
 } from './style'
 
-import { useIsTrackSwitchedOff, usePublications, useTrack, useParticipantIsReconnecting } from 'hooks'
+import { useIsTrackSwitchedOff, usePublications, useTrack, useParticipantIsReconnecting, useChatContext } from 'hooks'
 import AudioLevelIndicator from 'components/AudioLevelIndicator/AudioLevelIndicator'
 
 interface ParticipantInfoProps {
@@ -43,6 +43,7 @@ export const ParticipantInfo = ({
   doctorStyle,
 }: ParticipantInfoProps) => {
   const publications = usePublications(participant)
+  const { isChatWindowOpen } = useChatContext()
 
   const Container = isPrimaryCam ? ContainerPrimary : ContainerFull
   const InfoRow = isPrimaryCam ? InfoRowTop : InfoRowBottom
@@ -64,10 +65,14 @@ export const ParticipantInfo = ({
       data-cy-participant={participant.identity}
       hideParticipant={hideParticipant}
     >
-      <InfoContainer doctorStyle={doctorStyle}>
+      <InfoContainer
+        doctorStyle={doctorStyle}
+        isChatWindowOpen={isChatWindowOpen}
+        isPrimaryCam={isPrimaryCam}
+      >
         {!isPrimaryCam && (<NetworkQualityLevel participant={participant} />)}
         <InfoRow >
-          <Identity >
+          <Identity doctorStyle={doctorStyle}>
             <AudioLevelIndicator audioTrack={audioTrack} />
             <Typography >
               {participant.identity}
@@ -77,9 +82,9 @@ export const ParticipantInfo = ({
         </InfoRow>
         <div>{isSelected && <PinIcon />}</div>
       </InfoContainer>
-      <InnerContainer doctorStyle={doctorStyle}>
+      <InnerContainer doctorStyle={doctorStyle} isChatWindowOpen={isChatWindowOpen}>
         {(!isVideoEnabled || isVideoSwitchedOff) && (
-          <AvatarContainer>
+          <AvatarContainer doctorStyle={doctorStyle}>
             <AvatarIcon />
           </AvatarContainer>
         )}

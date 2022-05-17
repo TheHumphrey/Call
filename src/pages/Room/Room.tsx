@@ -7,7 +7,6 @@ import {
   PrimaryCam,
   TopMenu,
   TimerMenu,
-  ResolutionMenu,
   BottomMenu,
   SecondaryCam,
   // BottomButton,
@@ -35,31 +34,28 @@ import {
 
 import { useNavigate } from "react-router-dom"
 import { ToggleChatButton } from "components/ToggleChatButton/ToggleChatButton"
-import { useChatContext, useVideoContext, useParticipants } from "hooks"
+import { useChatContext, useVideoContext } from "hooks"
 
 export const Room = () => {
   // const [pacienteVideo, setPacienteVideo] = useState()
   const [screen, setScreen] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
-  const [isAwaitDoctor, setIsAwaitDoctor] = useState(true)
 
   // const [selectedType, setSelectedType] = useState({ value: [] });
 
-  const participants = useParticipants()
+  // const participants = useParticipants()
 
   useEffect(() => {
-    if (!isAwaitDoctor) {
-      setTimeout(() => {
-        setCurrentTime(state => state + 1)
-      }, 1000)
-    }
-  }, [isAwaitDoctor, currentTime])
+    setTimeout(() => {
+      setCurrentTime(state => state + 1)
+    }, 1000)
+  }, [currentTime])
 
-  useEffect(
-    () => {
-      setIsAwaitDoctor(participants.length === 0)
-    }, [participants]
-  )
+  // useEffect(
+  //   () => {
+  //     setIsAwaitDoctor(participants.length === 0)
+  //   }, [participants]
+  // )
 
   const hours = Math.floor(currentTime / 60 / 60)
   const minutes = Math.floor(currentTime / 60)
@@ -72,7 +68,6 @@ export const Room = () => {
 
   const handleDisconnect = () => {
     room?.disconnect()
-    setIsAwaitDoctor(false)
 
     history('/callend', { replace: true })
   }
