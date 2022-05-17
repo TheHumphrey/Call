@@ -61,7 +61,6 @@ const AppRouter = () => {
   const [isDoctorConnected, setIsDoctorConnected] = useState(false)
 
   const roomState = useRoomState()
-
   const participants = useParticipants()
 
   useEffect(
